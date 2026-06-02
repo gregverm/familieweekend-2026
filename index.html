@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Familieweekend 2026</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Google Fonts: Boogaloo (comical country feel) + Lato -->
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --hay:    #f5c842;
+      --barn:   #c0392b;
+      --sky:    #87ceeb;
+      --grass:  #4a7c3f;
+      --cream:  #fdf6e3;
+      --wood:   #8b5e3c;
+      --shadow: rgba(0,0,0,0.35);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── SKY / MEADOW BACKGROUND ── */
+    .hero {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.55) 0%, transparent 60%),
+        linear-gradient(180deg,
+          #aeddf7 0%,
+          #d6edfa 38%,
+          #c8e6a0 50%,
+          #4a7c3f 100%
+        );
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      /*padding: 2rem 1rem 4rem;*/
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* rolling hills */
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -10%; right: -10%;
+      height: 38%;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 100%, #5a9642 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 75% 100%, #4a7c3f 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* sun */
+    .sun {
+      position: absolute;
+      top: 6%; right: 10%;
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, #fff6a0 30%, #f7d94c 65%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px 20px #f7d94c88;
+      animation: pulse-sun 4s ease-in-out infinite;
+    }
+    @keyframes pulse-sun {
+      0%,100% { box-shadow: 0 0 60px 20px #f7d94c88; }
+      50%      { box-shadow: 0 0 90px 35px #f7d94cbb; }
+    }
+
+    /* clouds */
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 50px;
+      opacity: 0.88;
+      animation: drift linear infinite;
+    }
+    .cloud::before, .cloud::after {
+      content: ''; position: absolute;
+      background: white; border-radius: 50%;
+    }
+    .c1 { width:120px;height:38px; top:8%; left:-140px; animation-duration:32s; animation-delay:0s; }
+    .c1::before { width:60px;height:60px; top:-28px; left:18px; }
+    .c1::after  { width:42px;height:42px; top:-18px; left:55px; }
+    .c2 { width:90px;height:28px; top:14%; left:-110px; animation-duration:44s; animation-delay:-14s; }
+    .c2::before { width:46px;height:46px; top:-22px; left:14px; }
+    .c2::after  { width:34px;height:34px; top:-14px; left:42px; }
+    .c3 { width:70px;height:22px; top:5%; left:-90px;  animation-duration:37s; animation-delay:-28s; }
+    .c3::before { width:36px;height:36px; top:-18px; left:10px; }
+    .c3::after  { width:28px;height:28px; top:-12px; left:33px; }
+    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 200px)); } }
+
+    /* ── TITLE ── */
+    .title-wrap {
+      position: relative;
+      z-index: 2;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .main-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(3rem, 10vw, 8rem);
+      color: var(--barn);
+      text-shadow:
+        4px 4px 0 #7a1a0a,
+        -2px -2px 0 #f5c842,
+        8px 8px 16px rgba(0,0,0,0.25);
+      line-height: 1;
+      letter-spacing: 2px;
+      animation: title-drop 0.9s cubic-bezier(.22,1.4,.55,1) both;
+    }
+    @keyframes title-drop {
+      from { transform: translateY(-80px) rotate(-4deg); opacity: 0; }
+      to   { transform: none; opacity: 1; }
+    }
+
+    .subtitle {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1.1rem, 3.5vw, 2rem);
+      color: var(--grass);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff;
+      margin-top: .4rem;
+      animation: fade-up 0.7s 0.4s ease both;
+    }
+
+    /* ── DATES BANNER ── */
+    .dates-banner {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--cream);
+      background: var(--wood);
+      padding: .45rem 2rem;
+      border-radius: 6px;
+      border: 3px solid var(--hay);
+      margin-top: .9rem;
+      box-shadow: 3px 3px 0 #4a2c14;
+      animation: fade-up 0.7s 0.6s ease both;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card-intro {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--cream);
+      background: var(--wood);
+      padding: .45rem 2rem;
+      border-radius: 6px;
+      border: 3px solid var(--hay);
+      margin-top: .9rem;
+      box-shadow: 3px 3px 0 #4a2c14;
+      animation: fade-up 0.7s 0.6s ease both;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-section {
+      position: relative;
+      z-index: 2;
+      margin-top: 2.4rem;
+      animation: fade-up 0.8s 0.8s ease both;
+    }
+
+    .countdown-label {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood);
+      font-size: clamp(.9rem, 2vw, 1.25rem);
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+      text-shadow: 1px 1px 0 #fff8;
+    }
+
+    .countdown-grid {
+      display: flex;
+      gap: clamp(.5rem, 2vw, 1.4rem);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cd-box {
+      background: var(--barn);
+      border: 4px solid var(--hay);
+      border-radius: 12px;
+      padding: .7rem 1.1rem;
+      min-width: 90px;
+      text-align: center;
+      box-shadow: 4px 4px 0 #7a1a0a, 0 8px 24px rgba(0,0,0,.22);
+      position: relative;
+    }
+    .cd-box::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cd-num {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--hay);
+      line-height: 1;
+      display: block;
+      text-shadow: 2px 2px 0 #7a1a0a;
+      transition: transform .15s;
+    }
+    .cd-num.bump { animation: bump .2s ease; }
+    @keyframes bump {
+      0%  { transform: scale(1.2) translateY(-4px); }
+      100%{ transform: scale(1) translateY(0); }
+    }
+    .cd-unit {
+      font-family: 'Boogaloo', cursive;
+      font-size: .85rem;
+      color: #f5c84288;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: .25rem;
+      display: block;
+    }
+
+    /* finished state */
+    .finished-msg {
+      display: none;
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
+      color: var(--hay);
+      text-shadow: 2px 2px 0 var(--barn);
+      text-align: center;
+    }
+
+    /* ── DIVIDER ── */
+    .fence-divider {
+      position: relative;
+      z-index: 2;
+      margin: 2.8rem 0 1.5rem;
+      font-size: 2rem;
+      letter-spacing: .6rem;
+      color: var(--wood);
+      text-align: center;
+      user-select: none;
+    }
+
+    /* ── ZIPCODE "2540" ── */
+    .zipcode-section {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: fade-up 0.8s 1s ease both;
+    }
+    .zip-label {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood);
+      font-size: clamp(.85rem, 1.8vw, 1.15rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+      opacity: 0;
+      animation: fade-up .6s 1.4s ease forwards;
+    }
+
+    /* The big clipped letters */
+    .zip-letters {
+      display: flex;
+      justify-content: center;
+      gap: clamp(.3rem, 1.5vw, 1rem);
+      flex-wrap: wrap;
+    }
+
+    .zip-letter {
+      position: relative;
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(10rem, 30vw, 22rem);
+      font-weight: 900;
+      line-height: 1;
+      color: transparent;
+      /* photo fill via background-clip */
+      background-size: cover;
+      background-position: center;
+      -webkit-background-clip: text;
+      background-clip: text;
+      /* stroke via text-stroke */
+      -webkit-text-stroke: 3px var(--barn);
+      filter: drop-shadow(4px 6px 0 rgba(0,0,0,.35));
+      opacity: 0;
+      transform: translateY(40px) rotate(-6deg);
+      transition: filter .3s;
+    }
+    .zip-letter:hover { filter: drop-shadow(6px 8px 0 rgba(0,0,0,.5)) brightness(1.12); }
+
+    /* Each digit gets a different Unsplash photo of Belgian countryside */
+    .zip-letter:nth-child(1) { background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/32/Geelhandlaan_1%2C_Hove.JPG'); animation: letter-pop .6s 1.6s cubic-bezier(.22,1.4,.55,1) forwards; }
+    .zip-letter:nth-child(2) { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOHHbxuqnL3PRMDmy0uLcrVQo9IM5fGkjtnA&s'); animation: letter-pop .6s 1.8s cubic-bezier(.22,1.4,.55,1) forwards; }
+    .zip-letter:nth-child(3) { background-image: url('https://d2exd72xrrp1s7.cloudfront.net/www/000/1k4/39/3983wok69lqu15whgn2qbuq6v3d5ozbm3-uhi12736458/0?width=1920&crop=false&q=70'); animation: letter-pop .6s 2.0s cubic-bezier(.22,1.4,.55,1) forwards; }
+    .zip-letter:nth-child(4) { background-image: url('https://www.hove.be/imageresizer/D3C6B36C5D1CEA9D9A37DAB4ACD76109/47.JPG?h=800'); animation: letter-pop .6s 2.2s cubic-bezier(.22,1.4,.55,1) forwards; }
+
+    @keyframes letter-pop {
+      to { opacity: 1; transform: translateY(0) rotate(0deg); }
+    }
+
+    .zip-city {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1.2rem, 3.5vw, 2.2rem);
+      color: var(--cream);
+      background: var(--grass);
+      display: inline-block;
+      padding: .3rem 1.8rem;
+      border-radius: 30px;
+      margin-top: .5rem;
+      border: 3px solid var(--hay);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0 #2d4f25;
+      opacity: 0;
+      animation: fade-up .6s 2.6s ease forwards;
+    }
+
+    /* ── SHARED ANIM ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .cd-box { min-width: 68px; padding: .5rem .7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+
+  <!-- Decorative -->
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <!-- Title -->
+  <div class="title-wrap">
+    <h1 class="main-title">Familieweekend 2026</h1>
+    <div class="subtitle">samen genieten &bull; lachen &bull; beleven</div>
+    <div class="dates-banner">3 juli – 5 juli 2026 &nbsp;🌻</div>
+
+    <div class="card-intro">
+      &#10024;Het aftellen is begonnen.&#10024;<br/><br/>
+      Een nieuw familieweekend, een nieuwe bestemming... maar waarheen? Dat blijft voorlopig nog ons bestbewaarde geheim.&#129323;<br/><br/>
+
+      Ben jij een echte speurneus?&#128373;<br/>
+      Dan is dit jouw moment. Binnen enkele dagen, uren of misschien zels minuten duiken hier de eerste aanwijzingen op.<br/>
+      Kleine hints, subtiele sporen en verborgen clues die stukje bij beetje het mysterie zullen onthullen.<br/><br/>
+
+      Misschien ben jij wel de eerste die ontdekt waar we dit jaar naartoe trekken.
+      En lukt het niet meteen om de puzzel te leggen?<br/>
+      Geen zorgen, de grote onthulling laat niet lang meer op zich wachten.<br/><br/>
+
+      Houd deze website dus goed in de gaten... want het avontuur begint hier.&#127775;&#128640;<br/><br/>
+
+      Tot snel! &#128064;
+    </div>
+  </div>
+
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // ── Countdown ──────────────────────────────────────────────
+  // Start: 01 June 2026 00:00:00 local
+  const TARGET = new Date('2026-07-03T00:00:00');
+  const END    = new Date('2026-07-05T12:00:00');
+
+  const elDays  = document.getElementById('cd-days');
+  const elHours = document.getElementById('cd-hours');
+  const elMins  = document.getElementById('cd-mins');
+  const elSecs  = document.getElementById('cd-secs');
+  const elGrid  = document.getElementById('countdown-grid');
+  const elLabel = document.getElementById('cd-label');
+  const elDone  = document.getElementById('finished-msg');
+
+  function pad(n){ return String(Math.max(0,n)).padStart(2,'0'); }
+
+  function bumpEl(el, newVal){
+    if(el.textContent !== newVal){
+      el.textContent = newVal;
+      el.classList.remove('bump');
+      void el.offsetWidth;
+      el.classList.add('bump');
+    }
+  }
+
+  function tick(){
+    const now  = Date.now();
+    const diff = TARGET - now;
+
+    if(diff <= 0){
+      // We're in the event window or after
+      elGrid.style.display = 'none';
+      elLabel.style.display = 'none';
+      elDone.style.display = 'block';
+      return;
+    }
+
+    const totalSecs = Math.floor(diff / 1000);
+    const d = Math.floor(totalSecs / 86400);
+    const h = Math.floor((totalSecs % 86400) / 3600);
+    const m = Math.floor((totalSecs % 3600) / 60);
+    const s = totalSecs % 60;
+
+    bumpEl(elDays,  pad(d));
+    bumpEl(elHours, pad(h));
+    bumpEl(elMins,  pad(m));
+    bumpEl(elSecs,  pad(s));
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
