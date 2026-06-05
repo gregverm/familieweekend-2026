@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checklist – Familieweekend 2026</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --hay:   #f5c842;
+      --barn:  #c0392b;
+      --grass: #4a7c3f;
+      --cream: #fdf6e3;
+      --wood:  #8b5e3c;
+      --sky:   #aeddf7;
+      --teal:  #4a9b8e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO HEADER ── */
+    .page-header {
+      min-height: 38vh;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.55) 0%, transparent 60%),
+        linear-gradient(180deg, #aeddf7 0%, #d6edfa 42%, #c8e6a0 42%, #4a7c3f 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2.5rem 1rem 4rem;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -10%; right: -10%; height: 40%;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 100%, #5a9642 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 75% 100%, #4a7c3f 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .sun {
+      position: absolute;
+      top: 8%; right: 8%;
+      width: 70px; height: 70px;
+      background: radial-gradient(circle, #fff6a0 30%, #f7d94c 65%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 50px 16px #f7d94c88;
+      animation: pulse-sun 4s ease-in-out infinite;
+    }
+    @keyframes pulse-sun { 0%,100%{box-shadow:0 0 50px 16px #f7d94c88}50%{box-shadow:0 0 80px 28px #f7d94cbb} }
+    .cloud { position:absolute; background:white; border-radius:50px; opacity:.88; animation:drift linear infinite; }
+    .cloud::before,.cloud::after { content:''; position:absolute; background:white; border-radius:50%; }
+    .c1 { width:120px;height:38px;top:10%;left:-140px;animation-duration:32s;animation-delay:0s; }
+    .c1::before { width:60px;height:60px;top:-28px;left:18px; }
+    .c1::after  { width:42px;height:42px;top:-18px;left:55px; }
+    .c2 { width:80px;height:24px;top:18%;left:-110px;animation-duration:46s;animation-delay:-18s; }
+    .c2::before { width:40px;height:40px;top:-20px;left:12px; }
+    .c2::after  { width:30px;height:30px;top:-12px;left:38px; }
+    .c3 { width:70px;height:22px;top:5%;left:-90px;animation-duration:37s;animation-delay:-28s; }
+    .c3::before{width:36px;height:36px;top:-18px;left:10px} .c3::after{width:28px;height:28px;top:-12px;left:33px}
+    @keyframes drift { from{transform:translateX(0)} to{transform:translateX(calc(100vw + 200px))} }
+
+    .header-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      color: var(--barn);
+      text-shadow: 4px 4px 0 #7a1a0a, -2px -2px 0 #f5c842, 6px 6px 14px rgba(0,0,0,.22);
+      line-height: 1;
+      position: relative; z-index: 2;
+      animation: title-drop .8s cubic-bezier(.22,1.4,.55,1) both;
+      text-align: center;
+    }
+    @keyframes title-drop { from{transform:translateY(-60px) rotate(-3deg);opacity:0} to{transform:none;opacity:1} }
+
+    .header-sub {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--grass);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff;
+      margin-top: .4rem;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .3s ease both;
+    }
+
+    .lets-go-badge {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--cream);
+      background: var(--barn);
+      border: 3px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.6rem;
+      margin-top: .9rem;
+      box-shadow: 3px 3px 0 #7a1a0a;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .5s ease both;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .checklist-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+
+    /* ── SECTION CARD ── */
+    .cl-card {
+      background: white;
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #c0392b44, 0 8px 28px rgba(0,0,0,.08);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      animation: fade-up .5s ease both;
+    }
+    .cl-card:nth-child(1) { animation-delay: .1s; }
+    .cl-card:nth-child(2) { animation-delay: .2s; }
+    .cl-card:nth-child(3) { animation-delay: .3s; }
+    .cl-card:nth-child(4) { animation-delay: .4s; }
+    .cl-card:nth-child(5) { animation-delay: .5s; }
+
+    .cl-card-header {
+      background: var(--wood);
+      padding: .7rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+    .cl-card-header h2 {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--hay);
+      text-shadow: 2px 2px 0 #4a2c14;
+      margin: 0;
+      line-height: 1;
+    }
+    .cl-card-header .icon { font-size: 1.6rem; }
+
+    .cl-card-body {
+      padding: 1.2rem 1.4rem 1.4rem;
+    }
+
+    /* ── TWO-COLUMN GRID ── */
+    .cl-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem 2rem;
+    }
+    @media (max-width: 540px) {
+      .cl-columns { grid-template-columns: 1fr; }
+    }
+
+    /* ── CHECKBOX ITEM ── */
+    .cl-item {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .45rem 0;
+      border-bottom: 1px dashed rgba(138,94,60,.18);
+      cursor: pointer;
+      transition: background .15s;
+      border-radius: 4px;
+    }
+    .cl-item:last-child { border-bottom: none; }
+    .cl-item:hover { background: rgba(245,200,66,.08); }
+
+    /* custom checkbox */
+    .cl-item input[type="checkbox"] { display: none; }
+    .cl-box {
+      width: 22px; height: 22px;
+      border: 2.5px solid var(--teal);
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: white;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, border-color .2s, transform .15s;
+      position: relative;
+    }
+    .cl-box::after {
+      content: '✓';
+      font-size: .8rem;
+      color: white;
+      font-weight: 900;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity .15s, transform .15s;
+    }
+    .cl-item input:checked ~ .cl-label { text-decoration: line-through; opacity: .45; }
+    .cl-item input:checked ~ .cl-box,
+    .cl-item.checked .cl-box {
+      background: var(--teal);
+      border-color: var(--teal);
+      transform: scale(1.1);
+    }
+    .cl-item input:checked ~ .cl-box::after,
+    .cl-item.checked .cl-box::after { opacity: 1; transform: scale(1); }
+
+    /* fix order: label before box in DOM but visually box first */
+    .cl-item { flex-direction: row; }
+
+    .cl-label {
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(.85rem, 1.8vw, 1rem);
+      color: #4a2c14;
+      transition: opacity .2s, text-decoration .2s;
+      flex: 1;
+    }
+
+    /* ── EMPTY LINES (custom fill) ── */
+    .cl-empty-line {
+      height: 28px;
+      border-bottom: 1.5px dashed var(--teal);
+      margin: .35rem 0;
+      border-radius: 0;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      background: var(--cream);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .9rem 1.2rem .7rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 3px 3px 0 #c0392b44;
+    }
+    .progress-label {
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.1rem;
+      color: var(--wood);
+      letter-spacing: 1px;
+      margin-bottom: .5rem;
+    }
+    .progress {
+      height: 16px;
+      border-radius: 20px;
+      background: rgba(138,94,60,.12);
+      overflow: visible;
+    }
+    .progress-bar {
+      background: linear-gradient(90deg, var(--teal), var(--grass));
+      border-radius: 20px;
+      transition: width .4s ease;
+      position: relative;
+    }
+    .progress-bar::after {
+      content: attr(data-pct);
+      position: absolute;
+      right: -4px; top: 50%;
+      transform: translateY(-50%);
+      background: var(--barn);
+      color: var(--hay);
+      font-family: 'Boogaloo', cursive;
+      font-size: .75rem;
+      padding: 1px 6px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    #progress-text {
+      font-family: 'Boogaloo', cursive;
+      font-size: .9rem;
+      color: var(--grass);
+      margin-top: .4rem;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2.5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.1rem;
+      color: var(--wood);
+      letter-spacing: 1px;
+    }
+    .page-footer span { font-size: 1.5rem; }
+
+    /* ── BACK LINK ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.05rem;
+      color: var(--cream);
+      background: var(--wood);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.2rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 #4a2c14;
+      position: relative; z-index: 2;
+      margin-bottom: .5rem;
+      transition: transform .15s;
+      animation: fade-up .5s .6s ease both;
+    }
+    .back-btn:hover { transform: translateY(-2px); color: var(--hay); }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── CONFETTI on 100% ── */
+    #confetti-msg {
+      display: none;
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--barn);
+      text-shadow: 2px 2px 0 var(--hay);
+      text-align: center;
+      padding: .5rem 0 0;
+      animation: title-drop .5s cubic-bezier(.22,1.4,.55,1) both;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <a href="index.html" class="back-btn">← Terug naar startpagina</a>
+  <h1 class="header-title">Heb ik alles mee?</h1>
+  <p class="header-sub">Checklist &bull; Familieweekend 2026</p>
+  <div class="lets-go-badge">🚗 LET'S GO! &nbsp; 3 juli – 5 juli 2026 🌻</div>
+</header>
+
+<!-- BODY -->
+<main class="checklist-body">
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-label">✅ Voortgang</div>
+    <div class="progress" role="progressbar">
+      <div class="progress-bar" id="prog-bar" style="width:0%" data-pct="0%"></div>
+    </div>
+    <div id="progress-text">0 van 0 items aangevinkt</div>
+    <div id="confetti-msg">🎉 Proficiat! Jij hebt er echt veel zin in! 🚗💨</div>
+  </div>
+
+  <!-- 1. Kleding -->
+  <div class="cl-card">
+    <div class="cl-card-header">
+      <span class="icon">👕</span>
+      <h2>Kleding en Co.</h2>
+    </div>
+    <div class="cl-card-body">
+      <div class="cl-columns">
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Onderbroeken / sokken</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Riem of bretellen</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Lange en korte broek</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">T-shirts en truien</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Regenjas</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Pet of hoed in stro</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Slippers / schoenen</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Zwembroek / bikini</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Handdoeken</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Zonnebril</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Toiletartikelen -->
+  <div class="cl-card">
+    <div class="cl-card-header">
+      <span class="icon">🪥</span>
+      <h2>Toiletartikelen</h2>
+    </div>
+    <div class="cl-card-body">
+      <div class="cl-columns">
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Oorstokjes / kam / gel</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Make-up / haaraccessoires</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Deo / parfum / zakdoeken</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Maandverband of tampons</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Tandenborstel / tandpasta</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Douchegel / shampoo</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Washand / handdoeken</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Lenzenvloeistof / brildoekje</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Scheerapparaat</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Zonnecrème / aftersun</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Medisch + Documenten -->
+  <div class="cl-card">
+    <div class="cl-card-header">
+      <span class="icon">💊</span>
+      <h2>Medisch &amp; Documenten</h2>
+    </div>
+    <div class="cl-card-body">
+      <div class="cl-columns">
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Dagelijkse medicijnen</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Dafalgan (indien kater 😉)</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Paspoort</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Rijbewijs</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Diploma van goed humeur 😄</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Europese ziekte-kaart</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Reispilletjes / pilletjes tegen zeeziekte</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Varia -->
+  <div class="cl-card">
+    <div class="cl-card-header">
+      <span class="icon">🎒</span>
+      <h2>Varia</h2>
+    </div>
+    <div class="cl-card-body">
+      <div class="cl-columns">
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">GSM + oplader</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Boek / tijdschrift / leesbril</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Handbagage</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Foute kledij 🤠</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Centje voor souvenir</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Nekkussentje</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Zaklamp</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Voor de kinds -->
+  <div class="cl-card">
+    <div class="cl-card-header">
+      <span class="icon">🧸</span>
+      <h2>Voor de kinds</h2>
+    </div>
+    <div class="cl-card-body">
+      <div class="cl-columns">
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Babyfoon</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Reisbedje</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Luiers / zalfjes</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Speelgoed</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Zwembandjes</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Fopspeen</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Buggy</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Flesjes en voeding</span></label>
+        <label class="cl-item"><input type="checkbox"><div class="cl-box"></div><span class="cl-label">Knuffel om te slapen</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Zelf nog aan te vullen -->
+  <div class="cl-card">
+    <div class="cl-card-header">
+      <span class="icon">✏️</span>
+      <h2>Zelf nog aan te vullen</h2>
+    </div>
+    <div class="cl-card-body">
+      <div class="cl-columns" id="custom-cols">
+        <!-- 6 pairs = 12 custom items -->
+        <div class="cl-item" id="ci-1" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-2" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-3" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-4" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-5" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-6" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-7" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-8" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-9" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-10" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-11" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+        <div class="cl-item" id="ci-12" onclick="toggleCustom(this)"><div class="cl-box"></div><span class="cl-label"><em style="opacity:.4">Zelf in te vullen…</em></span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── Progress tracking ────────────────────────────
+  function updateProgress() {
+    const all = document.querySelectorAll('.cl-card input[type="checkbox"]');
+    const checked = document.querySelectorAll('.cl-card input[type="checkbox"]:checked');
+    const total = all.length;
+    const done  = checked.length;
+    const pct   = total > 0 ? Math.round((done / total) * 100) : 0;
+
+    const bar  = document.getElementById('prog-bar');
+    const txt  = document.getElementById('progress-text');
+    const conf = document.getElementById('confetti-msg');
+
+    bar.style.width = pct + '%';
+    bar.setAttribute('data-pct', pct + '%');
+    txt.textContent = done + ' van ' + total + ' items aangevinkt';
+
+    if (pct === 100) {
+      conf.style.display = 'block';
+    } else {
+      conf.style.display = 'none';
+    }
+  }
+
+  document.querySelectorAll('.cl-card input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', updateProgress);
+  });
+
+  updateProgress();
+
+  // ── Custom items (toggle only, no text editing for simplicity) ──
+  function toggleCustom(el) {
+    el.classList.toggle('checked');
+    // Reflect in check box
+    const box = el.querySelector('.cl-box');
+    const lbl = el.querySelector('.cl-label');
+    if (el.classList.contains('checked')) {
+      lbl.style.textDecoration = 'line-through';
+      lbl.style.opacity = '.45';
+    } else {
+      lbl.style.textDecoration = '';
+      lbl.style.opacity = '';
+    }
+  }
+</script>
+</body>
+</html>
