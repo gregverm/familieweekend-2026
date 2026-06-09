@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Familieweekend 2026</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --hay:   #f5c842;
+      --barn:  #c0392b;
+      --grass: #4a7c3f;
+      --cream: #fdf6e3;
+      --wood:  #8b5e3c;
+      --teal:  #4a9b8e;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Lato', sans-serif; background: var(--cream); overflow-x: hidden; }
+
+    /* ── HERO HEADER ── */
+    .page-header {
+      min-height: 38vh;
+      background:
+              radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.55) 0%, transparent 60%),
+              linear-gradient(180deg, #aeddf7 0%, #d6edfa 42%, #c8e6a0 42%, #4a7c3f 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2.5rem 1rem 4rem;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -10%; right: -10%; height: 40%;
+      background:
+              radial-gradient(ellipse 70% 60% at 30% 100%, #5a9642 0%, transparent 70%),
+              radial-gradient(ellipse 60% 50% at 75% 100%, #4a7c3f 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── BACK LINK ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.05rem;
+      color: var(--cream);
+      background: var(--wood);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.2rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 #4a2c14;
+      position: relative; z-index: 2;
+      margin-bottom: .5rem;
+      transition: transform .15s;
+      animation: fade-up .5s .6s ease both;
+    }
+    .back-btn:hover { transform: translateY(-2px); color: var(--hay); }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* sun */
+    .sun {
+      position: absolute; top: 8%; right: 8%;
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, #fff6a0 30%, #f7d94c 65%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px 20px #f7d94c88;
+      animation: pulse-sun 4s ease-in-out infinite;
+    }
+    @keyframes pulse-sun { 0%,100%{box-shadow:0 0 60px 20px #f7d94c88}50%{box-shadow:0 0 90px 35px #f7d94cbb} }
+
+    /* clouds */
+    .cloud { position:absolute; background:white; border-radius:50px; opacity:.88; animation:drift linear infinite; }
+    .cloud::before,.cloud::after { content:''; position:absolute; background:white; border-radius:50%; }
+    .c1 { width:120px;height:38px;top:8%;left:-140px;animation-duration:32s;animation-delay:0s; }
+    .c1::before{width:60px;height:60px;top:-28px;left:18px} .c1::after{width:42px;height:42px;top:-18px;left:55px}
+    .c2 { width:90px;height:28px;top:16%;left:-110px;animation-duration:44s;animation-delay:-14s; }
+    .c2::before{width:46px;height:46px;top:-22px;left:14px} .c2::after{width:34px;height:34px;top:-14px;left:42px}
+    .c3 { width:70px;height:22px;top:5%;left:-90px;animation-duration:37s;animation-delay:-28s; }
+    .c3::before{width:36px;height:36px;top:-18px;left:10px} .c3::after{width:28px;height:28px;top:-12px;left:33px}
+    @keyframes drift { from{transform:translateX(0)} to{transform:translateX(calc(100vw + 200px))} }
+
+    .header-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      color: var(--barn);
+      text-shadow: 4px 4px 0 #7a1a0a, -2px -2px 0 #f5c842, 6px 6px 14px rgba(0,0,0,.22);
+      line-height: 1;
+      position: relative; z-index: 2;
+      animation: title-drop .8s cubic-bezier(.22,1.4,.55,1) both;
+      text-align: center;
+    }
+    @keyframes title-drop { from{transform:translateY(-60px) rotate(-3deg);opacity:0} to{transform:none;opacity:1} }
+
+    .header-sub {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--grass);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff;
+      margin-top: .4rem;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .3s ease both;
+    }
+
+    .lets-go-badge {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--cream);
+      background: var(--barn);
+      border: 3px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.6rem;
+      margin-top: .9rem;
+      box-shadow: 3px 3px 0 #7a1a0a;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .5s ease both;
+    }
+
+    /* nav link */
+    .nav-link-row {
+      position: relative; z-index: 2;
+      align-self: flex-end;
+      margin-right: 1rem;
+      margin-bottom: .5rem;
+    }
+    .checklist-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.05rem;
+      color: var(--cream);
+      background: var(--wood);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.2rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 #4a2c14;
+      transition: transform .15s;
+      animation: fade-up .5s .6s ease both;
+    }
+    .checklist-btn:hover { transform: translateY(-2px); color: var(--hay); }
+
+    /* title */
+    .title-wrap { position:relative; z-index:2; text-align:center; }
+    .main-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(3rem, 10vw, 8rem);
+      color: var(--barn);
+      text-shadow: 4px 4px 0 #7a1a0a, -2px -2px 0 #f5c842, 8px 8px 16px rgba(0,0,0,.25);
+      line-height: 1; letter-spacing: 2px;
+      animation: title-drop .9s cubic-bezier(.22,1.4,.55,1) both;
+    }
+    @keyframes title-drop { from{transform:translateY(-80px) rotate(-4deg);opacity:0} to{transform:none;opacity:1} }
+
+    .subtitle {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1.1rem, 3.5vw, 2rem);
+      color: var(--grass); letter-spacing: 3px; text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff; margin-top: .4rem;
+      animation: fade-up .7s .4s ease both;
+    }
+    .dates-banner {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--cream); background: var(--wood);
+      padding: .45rem 2rem; border-radius: 6px;
+      border: 3px solid var(--hay); margin-top: .9rem;
+      box-shadow: 3px 3px 0 #4a2c14;
+      animation: fade-up .7s .6s ease both;
+    }
+
+    /* ── BODY ── */
+    .page-body {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-section {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fade-up .8s .2s ease both;
+    }
+    .countdown-label {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood); font-size: clamp(.9rem, 2vw, 1.25rem);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: .8rem; text-shadow: 1px 1px 0 #fff8;
+    }
+    .countdown-grid { display:flex; gap:clamp(.5rem,2vw,1.4rem); flex-wrap:wrap; justify-content:center; }
+    .cd-box {
+      background: var(--barn); border: 4px solid var(--hay);
+      border-radius: 12px; padding: .7rem 1.1rem; min-width: 90px;
+      text-align: center;
+      box-shadow: 4px 4px 0 #7a1a0a, 0 8px 24px rgba(0,0,0,.22);
+      position: relative;
+    }
+    .cd-box::after {
+      content:''; position:absolute; inset:0; border-radius:8px;
+      background: linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 60%);
+      pointer-events:none;
+    }
+    .cd-num {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.2rem,5vw,3.5rem); color:var(--hay);
+      line-height:1; display:block; text-shadow:2px 2px 0 #7a1a0a;
+    }
+    .cd-num.bump { animation: bump .2s ease; }
+    @keyframes bump { 0%{transform:scale(1.2) translateY(-4px)} 100%{transform:scale(1) translateY(0)} }
+    .cd-unit {
+      font-family: 'Boogaloo', cursive; font-size:.85rem;
+      color:#f5c84288; text-transform:uppercase; letter-spacing:2px;
+      margin-top:.25rem; display:block;
+    }
+    .finished-msg {
+      display:none; font-family:'Leckerli One',cursive;
+      font-size:clamp(1.5rem,4vw,2.8rem); color:var(--hay);
+      text-shadow:2px 2px 0 var(--barn); text-align:center;
+    }
+
+    /* ── FENCE DIVIDER ── */
+    .fence-divider {
+      text-align:center; font-size:2rem; letter-spacing:.6rem;
+      color:var(--wood); margin:2rem 0 1.5rem; user-select:none;
+    }
+
+    /* ── INFO CARD ── */
+    .info-card {
+      background: white;
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #c0392b44, 0 8px 28px rgba(0,0,0,.08);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      animation: fade-up .6s .3s ease both;
+    }
+    .info-card-header {
+      background: var(--wood);
+      padding: .7rem 1.4rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .info-card-header h2 {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.4rem,3.5vw,2rem);
+      color: var(--hay); text-shadow: 2px 2px 0 #4a2c14;
+      margin: 0; line-height: 1;
+    }
+    .info-card-header .icon { font-size: 1.6rem; }
+    .info-card-body {
+      padding: 1.4rem 1.6rem 1.6rem;
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(.95rem, 1.8vw, 1.05rem);
+      color: #4a2c14;
+      line-height: 1.75;
+    }
+    .info-card-body br { display: block; content: ''; margin-top: .5rem; }
+
+    /* ── CHECKLIST NAV CARD ── */
+    .nav-card {
+      background: var(--grass);
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #2d4f25, 0 8px 20px rgba(0,0,0,.1);
+      padding: 1.2rem 1.6rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      margin-top: 2.5rem;
+      animation: fade-up .6s .7s ease both;
+      text-decoration: none;
+    }
+    .nav-card:hover { transform: translateY(-3px); box-shadow: 5px 8px 0 #2d4f25; transition: transform .2s, box-shadow .2s; }
+    .nav-card-text { font-family:'Boogaloo',cursive; color:var(--cream); font-size:clamp(1.1rem,2.5vw,1.5rem); letter-spacing:1px; }
+    .nav-card-text strong { display:block; font-family:'Leckerli One',cursive; font-size:clamp(1.4rem,3vw,2rem); color:var(--hay); text-shadow:2px 2px 0 #2d4f25; }
+    .nav-card-arrow { font-size:2.5rem; }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    @media(max-width:480px){ .cd-box{min-width:68px;padding:.5rem .7rem} }
+
+    #family-peek {
+      position: fixed;
+      z-index: 9999;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(.22,1.4,.55,1), opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+      filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.35));
+    }
+    #family-peek img {
+      width: 140px;
+      display: block;
+    }
+    #family-peek.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    @keyframes wiggle {
+      0%,100% { rotate: 0deg; }
+      20%      { rotate: -8deg; }
+      40%      { rotate:  7deg; }
+      60%      { rotate: -5deg; }
+      80%      { rotate:  4deg; }
+    }
+    #family-peek.wiggle { animation: wiggle 0.6s ease 0.1s; }
+
+    /* ── SLOT MACHINE ── */
+    .slot-hint{font-family:'Boogaloo',cursive;color:var(--wood);font-size:clamp(.95rem,2vw,1.25rem);letter-spacing:2px;text-transform:uppercase;text-shadow:1px 1px 0 #fff8;text-align:center;margin-bottom:1.4rem;animation:fade-up .6s .3s ease both}
+
+    .slot-machine{display:flex;justify-content:center;gap:clamp(.5rem,2.5vw,1.6rem);flex-wrap:nowrap;animation:fade-up .7s .4s ease both}
+
+    .reel-wrap{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+
+    /* reel window */
+    .reel {
+      width: clamp(72px, 17vw, 148px);
+      height: clamp(88px, 21vw, 176px);
+      border: 4px solid var(--hay);
+      border-radius: 14px;
+      background: var(--barn);
+      box-shadow: 4px 4px 0 #7a1a0a, 0 8px 24px rgba(0,0,0,.25), inset 0 2px 8px rgba(0,0,0,.2);
+      overflow: hidden;
+      position: relative;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .reel::before,.reel::after{content:'';position:absolute;left:0;right:0;height:28%;z-index:3;pointer-events:none}
+    .reel::before{top:0;background:linear-gradient(to bottom,rgba(192,57,43,0.88) 0%,transparent 100%)}
+    .reel::after {bottom:0;background:linear-gradient(to top,  rgba(192,57,43,0.88) 0%,transparent 100%)}
+
+    /* states */
+    .reel.locked {
+      border-color: var(--grass);
+      box-shadow: 4px 4px 0 #2d4f25, 0 0 0 3px var(--grass), 0 8px 24px rgba(0,0,0,.25);
+    }
+    .reel.locked::before{background:linear-gradient(to bottom,rgba(74,124,63,.82) 0%,transparent 100%)}
+    .reel.locked::after {background:linear-gradient(to top,  rgba(74,124,63,.82) 0%,transparent 100%)}
+
+    .reel.wrong-flash{animation:wrong-flash .55s ease}
+    @keyframes wrong-flash{
+      0%,100%{border-color:var(--hay);box-shadow:4px 4px 0 #7a1a0a}
+      30%,70%{border-color:#ff3333;box-shadow:4px 4px 0 #990000,0 0 22px #ff333388}
+    }
+    .reel.unlock-flash{animation:unlock-flash .45s ease}
+    @keyframes unlock-flash{
+      0%,100%{border-color:var(--hay)}
+      50%{border-color:var(--hay);box-shadow:4px 4px 0 #7a1a0a,0 0 18px #f5c84288}
+    }
+
+    .reel-strip{display:flex;flex-direction:column;will-change:transform;position:relative;z-index:1}
+    .reel-digit{
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Leckerli One',cursive;
+      font-size:clamp(2.8rem,8vw,6rem);
+      color:var(--hay);text-shadow:2px 2px 0 #7a1a0a;
+      flex-shrink:0;
+    }
+
+    /* ── BUTTON ROW ── */
+    .btn-row{display:flex;gap:.4rem;align-items:center}
+
+    /* shared btn style */
+    .slot-btn{
+      font-family:'Boogaloo',cursive;
+      font-size:clamp(.75rem,1.6vw,1rem);
+      letter-spacing:.5px;
+      border-radius:10px;
+      border:2.5px solid;
+      transition:transform .1s, box-shadow .1s;
+      cursor:pointer;
+      outline:none;
+      user-select:none;
+      line-height:1.2;
+    }
+    .slot-btn:disabled{opacity:.38;cursor:default;transform:none !important;box-shadow:none !important}
+
+    /* next btn */
+    .btn-next{
+      padding:.45rem .7rem;
+      color:var(--cream);background:var(--wood);
+      border-color:var(--hay);
+      box-shadow:0 3px 0 #4a2c14;
+    }
+    .btn-next:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 0 #4a2c14}
+    .btn-next:active:not(:disabled){transform:translateY(1px);box-shadow:0 1px 0 #4a2c14}
+
+    /* lock btn */
+    .btn-lock{
+      padding:.45rem .7rem;
+      color:var(--cream);background:var(--barn);
+      border-color:var(--hay);
+      box-shadow:0 3px 0 #7a1a0a;
+    }
+    .btn-lock:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 0 #7a1a0a}
+    .btn-lock:active:not(:disabled){transform:translateY(1px);box-shadow:0 1px 0 #7a1a0a}
+
+    /* locked label */
+    .locked-label{
+      font-family:'Boogaloo',cursive;
+      font-size:clamp(.8rem,1.6vw,1rem);
+      color:var(--cream);background:var(--grass);
+      border:2.5px solid var(--grass);
+      border-radius:10px;padding:.45rem .9rem;
+      box-shadow:0 3px 0 #2d4f25;
+      white-space:nowrap;display:none;
+    }
+
+    /* ── SUCCESS ── */
+    .success-msg{display:none;text-align:center;margin-top:2.5rem;animation:title-drop .8s cubic-bezier(.22,1.4,.55,1) both}
+    .success-inner{display:inline-block;background:white;border:4px solid var(--hay);border-radius:20px;padding:1.5rem 2.5rem;box-shadow:6px 6px 0 #c0392b55,0 12px 32px rgba(0,0,0,.1)}
+    .success-inner p{font-family:'Leckerli One',cursive;font-size:clamp(1.4rem,3.5vw,2.4rem);color:var(--barn);text-shadow:2px 2px 0 var(--hay);margin:0;line-height:1.3}
+    .success-inner .emoji-row{font-size:2.5rem;margin-bottom:.5rem}
+
+    .instructions{text-align:center;font-family:'Boogaloo',cursive;color:rgba(138,94,60,.65);font-size:clamp(.85rem,1.8vw,1rem);letter-spacing:1px;margin-top:1.2rem;animation:fade-up .5s .8s ease both}
+
+    /* ── MAP ── */
+    .code-map-wrap {
+      margin-top: 2rem;
+      padding: 1rem;
+      animation: fade-up .8s .3s ease both;
+      opacity: 0;
+    }
+    #code-svg {
+      filter: drop-shadow(0 6px 24px rgba(192,57,43,0.35));
+      border-radius: 8px;
+    }
+
+    @keyframes fade-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:480px){.cd-box{min-width:68px;padding:.5rem .7rem}.reel{border-width:3px}.btn-row{gap:.3rem}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <a href="index.html" class="back-btn">← Terug naar startpagina</a>
+  <h1 class="header-title">Familieweekend 2026</h1>
+  <p class="header-sub">samen genieten &bull; lachen &bull; beleven</p>
+  <div class="lets-go-badge">🚗 LET'S GO! &nbsp; 3 juli – 5 juli 2026 🌻</div>
+</header>
+
+<!-- BODY -->
+<main class="page-body">
+
+  <!-- Intro card -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <span class="icon">🔍</span>
+      <h2>Tip 1</h2>
+    </div>
+    <div class="info-card-body">
+      <div class="slot-machine" id="slot-machine"></div>
+      <p class="instructions">▲ Wissel het cijfer &nbsp;·&nbsp; 🔒 Vergrendel je keuze</p>
+
+      <div class="success-msg" id="success-msg">
+        <div class="success-inner">
+          <div class="emoji-row">🎉</div>
+          <p>Deze code is correct,<br/>maar wat is de betekenis?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  const tip1Enabled = localStorage.getItem('tip-1-enabled') === "true";
+  if (tip1Enabled === false) {
+    window.location = 'tip-master.html';
+  }
+  // ── SLOT MACHINE ──────────────────────────────────────────────────
+  const ANSWER  = [2, 5, 4, 0];
+  const NDIGITS = 10;
+
+  // Per-reel state
+  const state = Array.from({length:4}, () => ({ current: 0, locked: false }));
+  let lockedCount = 0;
+  let busy = false; // debounce while animating
+
+  // ── BUILD ─────────────────────────────────────────────────────────
+  function cellH(idx) {
+    const r = document.getElementById(`reel-${idx}`);
+    return r ? r.clientHeight : 148;
+  }
+
+  function buildReels() {
+    const container = document.getElementById('slot-machine');
+    container.innerHTML = '';
+
+    for (let i = 0; i < 4; i++) {
+      // Random starting digit
+      state[i].current = Math.floor(Math.random() * NDIGITS);
+      state[i].locked  = false;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'reel-wrap';
+
+      // Reel window
+      const reel = document.createElement('div');
+      reel.className = 'reel';
+      reel.id = `reel-${i}`;
+
+      // Strip of 10 digits
+      const strip = document.createElement('div');
+      strip.className = 'reel-strip';
+      strip.id = `strip-${i}`;
+
+      for (let d = 0; d < NDIGITS; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'reel-digit';
+        cell.textContent = d;
+        strip.appendChild(cell);
+      }
+      reel.appendChild(strip);
+
+      // Button row
+      const btnRowTop = document.createElement('div');
+      btnRowTop.className = 'btn-row';
+      btnRowTop.id = `btnrowtop-${i}`;
+      const btnRow = document.createElement('div');
+      btnRow.className = 'btn-row';
+      btnRow.id = `btnrow-${i}`;
+
+      const btnNext = document.createElement('button');
+      btnNext.className = 'slot-btn btn-next';
+      btnNext.id = `btn-next-${i}`;
+      btnNext.innerHTML = '▲';
+      btnNext.title = 'Volgend cijfer';
+      btnNext.addEventListener('click', () => onNext(i));
+
+      const btnLock = document.createElement('button');
+      btnLock.className = 'slot-btn btn-lock';
+      btnLock.id = `btn-lock-${i}`;
+      btnLock.innerHTML = '🔒';
+      btnLock.title = 'Vergrendel dit cijfer';
+      btnLock.addEventListener('click', () => onLock(i));
+
+      const lockedLbl = document.createElement('span');
+      lockedLbl.className = 'locked-label';
+      lockedLbl.id = `lbl-${i}`;
+      lockedLbl.textContent = '🔒';
+
+      btnRowTop.appendChild(btnNext);
+      btnRow.appendChild(btnLock);
+      btnRow.appendChild(lockedLbl);
+
+      wrap.appendChild(btnRowTop);
+      wrap.appendChild(reel);
+      wrap.appendChild(btnRow);
+      container.appendChild(wrap);
+    }
+
+    // Position strips without animation
+    for (let i = 0; i < 4; i++) {
+      positionStrip(i, state[i].current, false);
+    }
+  }
+
+  function resetReels() {
+    for (let i = 0; i < 4; i++) {
+      // Random starting digit
+      state[i].current = Math.floor(Math.random() * NDIGITS);
+      state[i].locked  = false;
+    }
+
+    // Position strips without animation
+    for (let i = 0; i < 4; i++) {
+      positionStrip(i, state[i].current, false);
+    }
+  }
+
+  // Move strip to show `digit`; animate = true does smooth scroll
+  function positionStrip(idx, digit, animate) {
+    const strip = document.getElementById(`strip-${idx}`);
+    if (!strip) return;
+    const h = cellH(idx);
+
+    // Size cells to match reel height
+    strip.querySelectorAll('.reel-digit').forEach(c => {
+      c.style.height = h + 'px';
+      c.style.width  = '100%';
+    });
+
+    strip.style.transition = animate
+            ? 'transform 240ms cubic-bezier(.22,1.4,.55,1)'
+            : 'none';
+    strip.style.transform = `translateY(-${digit * h}px)`;
+  }
+
+  // ── NEXT BUTTON ───────────────────────────────────────────────────
+  function onNext(idx) {
+    if (state[idx].locked || busy) return;
+    const next = (state[idx].current + 1) % NDIGITS;
+    state[idx].current = next;
+    positionStrip(idx, next, true);
+  }
+
+  // ── LOCK BUTTON ───────────────────────────────────────────────────
+  function onLock(idx) {
+    if (state[idx].locked || busy) return;
+
+    const digit   = state[idx].current;
+    const correct = digit === ANSWER[idx];
+
+    if (correct) {
+      // Lock this reel permanently
+      lockReel(idx);
+      lockedCount++;
+      checkWin();
+    } else {
+      // Wrong — flash this reel, then release ALL locked reels
+      busy = true;
+      flashWrong(idx, () => {
+        releaseAllLocks();
+        resetReels();
+        busy = false;
+      });
+    }
+  }
+
+  function lockReel(idx) {
+    state[idx].locked = true;
+    document.getElementById(`reel-${idx}`).classList.add('locked');
+    document.getElementById(`btn-next-${idx}`).disabled = true;
+    document.getElementById(`btn-lock-${idx}`).style.display = 'none';
+    document.getElementById(`lbl-${idx}`).style.display = 'inline-block';
+  }
+
+  function unlockReel(idx) {
+    state[idx].locked = false;
+    document.getElementById(`reel-${idx}`).classList.remove('locked');
+    document.getElementById(`reel-${idx}`).classList.add('unlock-flash');
+    setTimeout(() => document.getElementById(`reel-${idx}`).classList.remove('unlock-flash'), 460);
+    document.getElementById(`btn-next-${idx}`).disabled = false;
+    document.getElementById(`btn-lock-${idx}`).style.display = '';
+    document.getElementById(`lbl-${idx}`).style.display = 'none';
+  }
+
+  function releaseAllLocks() {
+    for (let i = 0; i < 4; i++) {
+      if (state[i].locked) unlockReel(i);
+    }
+    lockedCount = 0;
+  }
+
+  function flashWrong(idx, cb) {
+    const reel = document.getElementById(`reel-${idx}`);
+    reel.classList.add('wrong-flash');
+    setTimeout(() => {
+      reel.classList.remove('wrong-flash');
+      if (cb) cb();
+    }, 560);
+  }
+
+  function checkWin() {
+    if (lockedCount === 4) {
+      setTimeout(() => {
+        const msg = document.getElementById('success-msg');
+        msg.style.display = 'block';
+        msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 350);
+    }
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────
+  window.addEventListener('load', buildReels);
+</script>
+</body>
+</html>
