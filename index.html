@@ -23,6 +23,8 @@
       --cream: #fdf6e3;
       --wood:  #8b5e3c;
       --teal:  #4a9b8e;
+      --fuchsia: #D84797;
+      --sky: #3ABEFF
     }
     *, *::before, *::after { box-sizing: border-box; }
     body { margin: 0; font-family: 'Lato', sans-serif; background: var(--cream); overflow-x: hidden; }
@@ -319,6 +321,72 @@
       80%      { rotate:  4deg; }
     }
     #family-peek.wiggle { animation: wiggle 0.6s ease 0.1s; }
+
+    /* Peek inner wrapper — receives the rotation so badge follows */
+    #peek-inner {
+      position: relative;
+      display: inline-block;
+    }
+    #family-peek img {
+      display: block;
+    }
+
+    /* Tip number badge */
+    #tip-badge {
+      display: none;
+      position: absolute;
+      top: -4px;
+      right: 0px;
+      background: var(--barn);
+      color: white;
+      border: 3px solid white;
+      border-radius: 50px;
+      box-shadow: 2px 2px 0 white;
+      padding: 4px 8px 4px 6px;
+      pointer-events: none;
+      z-index: 10000;
+      line-height: 1;
+      display: none;
+      align-items: center;
+      gap: 3px;
+      animation: badge-pop 0.4s cubic-bezier(.22,1.4,.55,1) both;
+
+      &.number-1 {
+        background: var(--hay);
+      }
+      &.number-2 {
+        background: var(--barn);
+      }
+      &.number-3 {
+        background: var(--grass);
+      }
+      &.number-4 {
+        background: var(--wood);
+      }
+      &.number-5 {
+        background: var(--fuchsia);
+      }
+      &.number-6 {
+        background: var(--sky);
+      }
+    }
+    .badge-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .badge-num {
+      font-family: 'Leckerli One', cursive;
+      font-size: 0.7rem;
+      font-weight: 700;
+      vertical-align: super;
+      line-height: 1;
+      margin-top: 8px;
+    }
+    @keyframes badge-pop {
+      from { transform: scale(0) rotate(-15deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg);  opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -383,7 +451,17 @@
 </main>
 
 <a id="family-peek" href="tip-onbekend.html" title="Psst… ! 👀">
-  <img src="heads/david.png" alt="" />
+  <div id="peek-inner">
+    <img src="heads/david.png" alt="" />
+    <span id="tip-badge">
+      <svg class="badge-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bell icon -->
+        <path d="M12 2a7 7 0 0 1 7 7c0 3.5 1.5 5.5 2.5 7H2.5C3.5 14.5 5 12.5 5 9a7 7 0 0 1 7-7z" fill="currentColor"/>
+        <path d="M10 19a2 2 0 1 0 4 0" fill="currentColor"/>
+      </svg>
+      <sup class="badge-num"></sup>
+    </span>
+  </div>
 </a>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
@@ -416,13 +494,17 @@
     const TIPS = {
       'heads/vicky.png' : 'tip-1.html',
       'heads/seppe.png' : 'tip-1.html',
+      'heads/helena.png' : 'tip-2.html',
+      'heads/francis.png' : 'tip-2.html',
     };
 
     let lastIdx = -1;
 
     function pickRandom() {
       let idx;
-      do { idx = Math.floor(Math.random() * FAMILY.length); } while (idx === lastIdx);
+      do {
+        idx = Math.floor(Math.random() * FAMILY.length);
+      } while (idx === lastIdx);
       lastIdx = idx;
       return FAMILY[idx];
     }
@@ -431,17 +513,34 @@
     function spawn() {
       const person = pickRandom();
       const IMG_H  = person.h;
+      const inner  = document.getElementById('peek-inner');
 
       // Update image & label
       img.src = person.src;
       img.alt = person.name;
 
-      localStorage.setItem('tip-1-enabled', false);
+      localStorage.setItem('tip-enabled', null);
       el.href = 'tip-onbekend.html?persoon=' + person.name;
 
+      const badge = document.getElementById('tip-badge');
+      const badgeNumber = badge.querySelector('.badge-num');
       if (TIPS[person.src]) {
-        el.href = TIPS[person.src];
-        localStorage.setItem('tip-1-enabled', true);
+        el.href = TIPS[person.src] + '?persoon=' + person.name;
+
+        // Extract tip number from url e.g. "tip-1.html" → "1"
+        const tipNum = (TIPS[person.src].match(/tip-(\d+)/) || [,'?'])[1];
+        badgeNumber.textContent = tipNum;
+        badge.classList.remove('number-1', 'number-2', 'number-3', 'number-4', 'number-5', 'number-6');
+        badge.classList.add('number-' + tipNum);
+        badge.style.display = 'flex';
+        // re-trigger animation
+        badge.style.animation = 'none';
+        void badge.offsetWidth;
+        badge.style.animation = '';
+
+        localStorage.setItem('tip-enabled', tipNum);
+      } else {
+        badge.style.display = 'none';
       }
 
       const edge = Math.floor(Math.random() * 4);
@@ -450,7 +549,7 @@
 
       // Reset styles
       el.style.cssText = '';
-      img.style.transform = '';
+      if (document.getElementById('peek-inner')) document.getElementById('peek-inner').style.transform = '';
 
       let hiddenStyle, shownStyle, originStyle;
 
@@ -468,7 +567,7 @@
         el._show = () => { el.style.transform = `translateY(${IMG_H * 1}px)`; };
         el._hide = () => { el.style.transform = 'translateY(0)'; };
         // flip image upside down so head points inward
-        el.querySelector('img').style.transform = 'rotate(180deg)';
+        inner.style.transform = 'rotate(180deg)';
       } else if (edge === 1) {
         // RIGHT — peek in from right
         const y = Math.random() * (vh - IMG_H);
@@ -480,7 +579,7 @@
         el.style.transformOrigin = 'right center';
         el._show = () => { el.style.transform = `translateX(-${IMG_W * 0.85}px)`; };
         el._hide = () => { el.style.transform = 'translateX(0)'; };
-        el.querySelector('img').style.transform = 'scaleX(-1) rotate(90deg) ';
+        inner.style.transform = 'scaleX(-1) rotate(90deg)';
       } else if (edge === 2) {
         // BOTTOM — peek up from bottom
         const x = Math.random() * (vw - IMG_W);
@@ -492,7 +591,7 @@
         el.style.transformOrigin = 'bottom center';
         el._show = () => { el.style.transform = `translateY(-${IMG_H * 1}px)`; };
         el._hide = () => { el.style.transform = 'translateY(0)'; };
-        el.querySelector('img').style.transform = '';
+        inner.style.transform = '';
       } else {
         // LEFT — peek in from left
         const y = Math.random() * (vh - IMG_H);
@@ -504,7 +603,7 @@
         el.style.transformOrigin = 'left center';
         el._show = () => { el.style.transform = `translateX(${IMG_W * 0.85}px)`; };
         el._hide = () => { el.style.transform = 'translateX(0)'; };
-        el.querySelector('img').style.transform = 'rotate(90deg)';
+        inner.style.transform = 'rotate(90deg)';
       }
 
       el.style.transform = '';
@@ -528,6 +627,7 @@
         }, 650);
       }, 8000);
     }
+    window.spawn = spawn;
 
     // First appearance after 3–7 seconds
     setTimeout(spawn, 3000 + Math.random() * 4000);
