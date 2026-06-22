@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Familieweekend 2026 - Tip 0</title>
+  <title>Familieweekend 2026 - Tip 4</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
   <!-- Google tag (gtag.js) -->
@@ -373,8 +373,8 @@
   <!-- Intro card -->
   <div class="info-card">
     <div class="info-card-header">
-      <span class="icon">🤔</span>
-      <h2 id="card-title">... denkt na...</h2>
+      <span class="icon">🔍</span>
+      <h2>Tip 4</h2>
     </div>
     <div class="info-card-body">
       <div id="person-content" style="display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap;">
@@ -404,6 +404,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script>
+  const tipEnabled = localStorage.getItem('tip-enabled') === "4";
+  if (tipEnabled === false) {
+    window.location = 'tip-master.html';
+  }
+</script>
+<script>
   // Known family members and their head images (same files as used in other pages)
   const heads = {
     david:    'heads/david.png',
@@ -427,7 +433,7 @@
   const display = raw ? capitalise(raw) : 'Iemand';
 
   // Update card title
-  document.getElementById('card-title').textContent = display + ' denkt na...';
+  //document.getElementById('card-title').textContent = display + ' denkt na...';
 
   // Update image (fall back to first known person if name not recognised)
   const img = document.getElementById('person-img');

@@ -492,10 +492,11 @@
     ];
 
     const TIPS = {
-      'heads/helena.png' : 'tip-0.html',
       'heads/vicky.png' : 'tip-1.html',
       'heads/seppe.png' : 'tip-2.html',
       'heads/david.png' : 'tip-3.html',
+      'heads/helena.png' : 'tip-4.html',
+      'heads/gregorie.png' : 'tip-5.html'
     };
 
     let lastIdx = -1;
@@ -543,7 +544,7 @@
         badge.style.display = 'none';
       }
 
-      const edge = Math.floor(Math.random() * 4);
+      let edge = Math.floor(Math.random() * 4);
       const vw = window.innerWidth;
       const vh = window.innerHeight;
 
