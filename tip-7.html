@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Familieweekend 2026 - Tip 7</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8RERL95W6Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-8RERL95W6Y');
+  </script>
+  <style>
+    :root {
+      --hay:   #f5c842;
+      --barn:  #c0392b;
+      --grass: #4a7c3f;
+      --cream: #fdf6e3;
+      --wood:  #8b5e3c;
+      --teal:  #4a9b8e;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Lato', sans-serif; background: var(--cream); overflow-x: hidden; }
+
+    /* ── HERO HEADER ── */
+    .page-header {
+      min-height: 38vh;
+      background:
+              radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.55) 0%, transparent 60%),
+              linear-gradient(180deg, #aeddf7 0%, #d6edfa 42%, #c8e6a0 42%, #4a7c3f 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2.5rem 1rem 4rem;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -10%; right: -10%; height: 40%;
+      background:
+              radial-gradient(ellipse 70% 60% at 30% 100%, #5a9642 0%, transparent 70%),
+              radial-gradient(ellipse 60% 50% at 75% 100%, #4a7c3f 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── BACK LINK ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.05rem;
+      color: var(--cream);
+      background: var(--wood);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.2rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 #4a2c14;
+      position: relative; z-index: 2;
+      margin-bottom: .5rem;
+      transition: transform .15s;
+      animation: fade-up .5s .6s ease both;
+    }
+    .back-btn:hover { transform: translateY(-2px); color: var(--hay); }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* sun */
+    .sun {
+      position: absolute; top: 8%; right: 8%;
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, #fff6a0 30%, #f7d94c 65%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px 20px #f7d94c88;
+      animation: pulse-sun 4s ease-in-out infinite;
+    }
+    @keyframes pulse-sun { 0%,100%{box-shadow:0 0 60px 20px #f7d94c88}50%{box-shadow:0 0 90px 35px #f7d94cbb} }
+
+    /* clouds */
+    .cloud { position:absolute; background:white; border-radius:50px; opacity:.88; animation:drift linear infinite; }
+    .cloud::before,.cloud::after { content:''; position:absolute; background:white; border-radius:50%; }
+    .c1 { width:120px;height:38px;top:8%;left:-140px;animation-duration:32s;animation-delay:0s; }
+    .c1::before{width:60px;height:60px;top:-28px;left:18px} .c1::after{width:42px;height:42px;top:-18px;left:55px}
+    .c2 { width:90px;height:28px;top:16%;left:-110px;animation-duration:44s;animation-delay:-14s; }
+    .c2::before{width:46px;height:46px;top:-22px;left:14px} .c2::after{width:34px;height:34px;top:-14px;left:42px}
+    .c3 { width:70px;height:22px;top:5%;left:-90px;animation-duration:37s;animation-delay:-28s; }
+    .c3::before{width:36px;height:36px;top:-18px;left:10px} .c3::after{width:28px;height:28px;top:-12px;left:33px}
+    @keyframes drift { from{transform:translateX(0)} to{transform:translateX(calc(100vw + 200px))} }
+
+    .header-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      color: var(--barn);
+      text-shadow: 4px 4px 0 #7a1a0a, -2px -2px 0 #f5c842, 6px 6px 14px rgba(0,0,0,.22);
+      line-height: 1;
+      position: relative; z-index: 2;
+      animation: title-drop .8s cubic-bezier(.22,1.4,.55,1) both;
+      text-align: center;
+    }
+    @keyframes title-drop { from{transform:translateY(-60px) rotate(-3deg);opacity:0} to{transform:none;opacity:1} }
+
+    .header-sub {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--grass);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff;
+      margin-top: .4rem;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .3s ease both;
+    }
+
+    .lets-go-badge {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--cream);
+      background: var(--barn);
+      border: 3px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.6rem;
+      margin-top: .9rem;
+      box-shadow: 3px 3px 0 #7a1a0a;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .5s ease both;
+    }
+
+    /* nav link */
+    .nav-link-row {
+      position: relative; z-index: 2;
+      align-self: flex-end;
+      margin-right: 1rem;
+      margin-bottom: .5rem;
+    }
+    .checklist-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.05rem;
+      color: var(--cream);
+      background: var(--wood);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.2rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 #4a2c14;
+      transition: transform .15s;
+      animation: fade-up .5s .6s ease both;
+    }
+    .checklist-btn:hover { transform: translateY(-2px); color: var(--hay); }
+
+    /* title */
+    .title-wrap { position:relative; z-index:2; text-align:center; }
+    .main-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(3rem, 10vw, 8rem);
+      color: var(--barn);
+      text-shadow: 4px 4px 0 #7a1a0a, -2px -2px 0 #f5c842, 8px 8px 16px rgba(0,0,0,.25);
+      line-height: 1; letter-spacing: 2px;
+      animation: title-drop .9s cubic-bezier(.22,1.4,.55,1) both;
+    }
+    @keyframes title-drop { from{transform:translateY(-80px) rotate(-4deg);opacity:0} to{transform:none;opacity:1} }
+
+    .subtitle {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1.1rem, 3.5vw, 2rem);
+      color: var(--grass); letter-spacing: 3px; text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff; margin-top: .4rem;
+      animation: fade-up .7s .4s ease both;
+    }
+    .dates-banner {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--cream); background: var(--wood);
+      padding: .45rem 2rem; border-radius: 6px;
+      border: 3px solid var(--hay); margin-top: .9rem;
+      box-shadow: 3px 3px 0 #4a2c14;
+      animation: fade-up .7s .6s ease both;
+    }
+
+    /* ── BODY ── */
+    .page-body {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-section {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fade-up .8s .2s ease both;
+    }
+    .countdown-label {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood); font-size: clamp(.9rem, 2vw, 1.25rem);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: .8rem; text-shadow: 1px 1px 0 #fff8;
+    }
+    .countdown-grid { display:flex; gap:clamp(.5rem,2vw,1.4rem); flex-wrap:wrap; justify-content:center; }
+    .cd-box {
+      background: var(--barn); border: 4px solid var(--hay);
+      border-radius: 12px; padding: .7rem 1.1rem; min-width: 90px;
+      text-align: center;
+      box-shadow: 4px 4px 0 #7a1a0a, 0 8px 24px rgba(0,0,0,.22);
+      position: relative;
+    }
+    .cd-box::after {
+      content:''; position:absolute; inset:0; border-radius:8px;
+      background: linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 60%);
+      pointer-events:none;
+    }
+    .cd-num {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.2rem,5vw,3.5rem); color:var(--hay);
+      line-height:1; display:block; text-shadow:2px 2px 0 #7a1a0a;
+    }
+    .cd-num.bump { animation: bump .2s ease; }
+    @keyframes bump { 0%{transform:scale(1.2) translateY(-4px)} 100%{transform:scale(1) translateY(0)} }
+    .cd-unit {
+      font-family: 'Boogaloo', cursive; font-size:.85rem;
+      color:#f5c84288; text-transform:uppercase; letter-spacing:2px;
+      margin-top:.25rem; display:block;
+    }
+    .finished-msg {
+      display:none; font-family:'Leckerli One',cursive;
+      font-size:clamp(1.5rem,4vw,2.8rem); color:var(--hay);
+      text-shadow:2px 2px 0 var(--barn); text-align:center;
+    }
+
+    /* ── FENCE DIVIDER ── */
+    .fence-divider {
+      text-align:center; font-size:2rem; letter-spacing:.6rem;
+      color:var(--wood); margin:2rem 0 1.5rem; user-select:none;
+    }
+
+    /* ── INFO CARD ── */
+    .info-card {
+      background: white;
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #c0392b44, 0 8px 28px rgba(0,0,0,.08);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      animation: fade-up .6s .3s ease both;
+    }
+    .info-card-header {
+      background: var(--wood);
+      padding: .7rem 1.4rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .info-card-header h2 {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.4rem,3.5vw,2rem);
+      color: var(--hay); text-shadow: 2px 2px 0 #4a2c14;
+      margin: 0; line-height: 1;
+    }
+    .info-card-header .icon { font-size: 1.6rem; }
+    .info-card-body {
+      padding: 1.4rem 1.6rem 1.6rem;
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(.95rem, 1.8vw, 1.05rem);
+      color: #4a2c14;
+      line-height: 1.75;
+    }
+    .info-card-body br { display: block; content: ''; margin-top: .5rem; }
+
+    /* ── CHECKLIST NAV CARD ── */
+    .nav-card {
+      background: var(--grass);
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #2d4f25, 0 8px 20px rgba(0,0,0,.1);
+      padding: 1.2rem 1.6rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      margin-top: 2.5rem;
+      animation: fade-up .6s .7s ease both;
+      text-decoration: none;
+    }
+    .nav-card:hover { transform: translateY(-3px); box-shadow: 5px 8px 0 #2d4f25; transition: transform .2s, box-shadow .2s; }
+    .nav-card-text { font-family:'Boogaloo',cursive; color:var(--cream); font-size:clamp(1.1rem,2.5vw,1.5rem); letter-spacing:1px; }
+    .nav-card-text strong { display:block; font-family:'Leckerli One',cursive; font-size:clamp(1.4rem,3vw,2rem); color:var(--hay); text-shadow:2px 2px 0 #2d4f25; }
+    .nav-card-arrow { font-size:2.5rem; }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    @media(max-width:480px){ .cd-box{min-width:68px;padding:.5rem .7rem} }
+
+    #family-peek {
+      position: fixed;
+      z-index: 9999;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(.22,1.4,.55,1), opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+      filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.35));
+    }
+    #family-peek img {
+      width: 140px;
+      display: block;
+    }
+    #family-peek.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    @keyframes wiggle {
+      0%,100% { rotate: 0deg; }
+      20%      { rotate: -8deg; }
+      40%      { rotate:  7deg; }
+      60%      { rotate: -5deg; }
+      80%      { rotate:  4deg; }
+    }
+    #family-peek.wiggle { animation: wiggle 0.6s ease 0.1s; }
+
+    /* ── SLOT MACHINE ── */
+    .slot-hint{font-family:'Boogaloo',cursive;color:var(--wood);font-size:clamp(.95rem,2vw,1.25rem);letter-spacing:2px;text-transform:uppercase;text-shadow:1px 1px 0 #fff8;text-align:center;margin-bottom:1.4rem;animation:fade-up .6s .3s ease both}
+
+    .slot-machine {
+      display: flex;
+      justify-content: center;
+      gap: clamp(.5rem, 2.5vw, 1.6rem);
+      flex-wrap: nowrap;
+      animation: fade-up .7s .4s ease both;
+    }
+
+    .reel-wrap{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+
+    /* reel window */
+    .reel {
+      width: clamp(72px, 17vw, 148px);
+      height: clamp(88px, 21vw, 176px);
+      border: 4px solid var(--hay);
+      border-radius: 14px;
+      background: var(--barn);
+      box-shadow: 4px 4px 0 #7a1a0a, 0 8px 24px rgba(0,0,0,.25), inset 0 2px 8px rgba(0,0,0,.2);
+      overflow: hidden;
+      position: relative;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .reel::before,.reel::after{content:'';position:absolute;left:0;right:0;height:28%;z-index:3;pointer-events:none}
+    .reel::before{top:0;background:linear-gradient(to bottom,rgba(192,57,43,0.88) 0%,transparent 100%)}
+    .reel::after {bottom:0;background:linear-gradient(to top,  rgba(192,57,43,0.88) 0%,transparent 100%)}
+
+    /* states */
+    .reel.locked {
+      border-color: var(--grass);
+      box-shadow: 4px 4px 0 #2d4f25, 0 0 0 3px var(--grass), 0 8px 24px rgba(0,0,0,.25);
+    }
+    .reel.locked::before{background:linear-gradient(to bottom,rgba(74,124,63,.82) 0%,transparent 100%)}
+    .reel.locked::after {background:linear-gradient(to top,  rgba(74,124,63,.82) 0%,transparent 100%)}
+
+    .reel.wrong-flash{animation:wrong-flash .55s ease}
+    @keyframes wrong-flash{
+      0%,100%{border-color:var(--hay);box-shadow:4px 4px 0 #7a1a0a}
+      30%,70%{border-color:#ff3333;box-shadow:4px 4px 0 #990000,0 0 22px #ff333388}
+    }
+    .reel.unlock-flash{animation:unlock-flash .45s ease}
+    @keyframes unlock-flash{
+      0%,100%{border-color:var(--hay)}
+      50%{border-color:var(--hay);box-shadow:4px 4px 0 #7a1a0a,0 0 18px #f5c84288}
+    }
+
+    .reel-strip{display:flex;flex-direction:column;will-change:transform;position:relative;z-index:1}
+    .reel-digit{
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Leckerli One',cursive;
+      font-size:clamp(2.8rem,8vw,6rem);
+      color:var(--hay);text-shadow:2px 2px 0 #7a1a0a;
+      flex-shrink:0;
+    }
+
+    /* ── BUTTON ROW ── */
+    .btn-row{display:flex;gap:.4rem;align-items:center}
+
+    /* shared btn style */
+    .slot-btn{
+      font-family:'Boogaloo',cursive;
+      font-size:clamp(.75rem,1.6vw,1rem);
+      letter-spacing:.5px;
+      border-radius:10px;
+      border:2.5px solid;
+      transition:transform .1s, box-shadow .1s;
+      cursor:pointer;
+      outline:none;
+      user-select:none;
+      line-height:1.2;
+    }
+    .slot-btn:disabled{opacity:.38;cursor:default;transform:none !important;box-shadow:none !important}
+
+    /* next btn */
+    .btn-next{
+      padding:.45rem .7rem;
+      color:var(--cream);background:var(--wood);
+      border-color:var(--hay);
+      box-shadow:0 3px 0 #4a2c14;
+    }
+    .btn-next:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 0 #4a2c14}
+    .btn-next:active:not(:disabled){transform:translateY(1px);box-shadow:0 1px 0 #4a2c14}
+
+    /* lock btn */
+    .btn-lock{
+      padding:.45rem .7rem;
+      color:var(--cream);background:var(--barn);
+      border-color:var(--hay);
+      box-shadow:0 3px 0 #7a1a0a;
+    }
+    .btn-lock:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 0 #7a1a0a}
+    .btn-lock:active:not(:disabled){transform:translateY(1px);box-shadow:0 1px 0 #7a1a0a}
+
+    /* locked label */
+    .locked-label{
+      font-family:'Boogaloo',cursive;
+      font-size:clamp(.8rem,1.6vw,1rem);
+      color:var(--cream);background:var(--grass);
+      border:2.5px solid var(--grass);
+      border-radius:10px;padding:.45rem .9rem;
+      box-shadow:0 3px 0 #2d4f25;
+      white-space:nowrap;display:none;
+    }
+
+    /* ── SUCCESS ── */
+    .success-msg{display:none;text-align:center;margin-top:2.5rem;animation:title-drop .8s cubic-bezier(.22,1.4,.55,1) both}
+    .success-inner{display:inline-block;background:white;border:4px solid var(--hay);border-radius:20px;padding:1.5rem 2.5rem;box-shadow:6px 6px 0 #c0392b55,0 12px 32px rgba(0,0,0,.1)}
+    .success-inner p{font-family:'Leckerli One',cursive;font-size:clamp(1.4rem,3.5vw,2.4rem);color:var(--barn);text-shadow:2px 2px 0 var(--hay);margin:0;line-height:1.3}
+    .success-inner .emoji-row{font-size:2.5rem;margin-bottom:.5rem}
+
+    .instructions{text-align:center;font-family:'Boogaloo',cursive;color:rgba(138,94,60,.65);font-size:clamp(.85rem,1.8vw,1rem);letter-spacing:1px;margin-top:1.2rem;animation:fade-up .5s .8s ease both}
+
+    /* ── MAP ── */
+    .code-map-wrap {
+      margin-top: 2rem;
+      padding: 1rem;
+      animation: fade-up .8s .3s ease both;
+      opacity: 0;
+    }
+    #code-svg {
+      filter: drop-shadow(0 6px 24px rgba(192,57,43,0.35));
+      border-radius: 8px;
+    }
+
+    @keyframes fade-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:480px){.cd-box{min-width:68px;padding:.5rem .7rem}.reel{border-width:3px}.btn-row{gap:.3rem}}
+
+    /* ══════════════════ MAZE ══════════════════ */
+    #maze-section {
+      margin-top: 1.4rem;
+    }
+    #maze-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      color: var(--barn);
+      text-shadow: 2px 2px 0 var(--hay);
+      margin-bottom: .5rem;
+    }
+    #maze-status {
+      font-family: 'Boogaloo', cursive;
+      font-size: 1rem;
+      color: var(--wood);
+      margin-bottom: .8rem;
+      min-height: 1.4em;
+      letter-spacing: .5px;
+    }
+    #maze-hud {
+      display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: .9rem;
+    }
+    .hud-pill {
+      font-family: 'Boogaloo', cursive;
+      font-size: .95rem;
+      background: var(--barn);
+      color: var(--hay);
+      border: 2px solid var(--hay);
+      border-radius: 20px;
+      padding: .25rem .9rem;
+      box-shadow: 2px 2px 0 #7a1a0a;
+      letter-spacing: .5px;
+    }
+    #maze-canvas-wrap {
+      position: relative;
+      display: inline-block;
+      border: 4px solid var(--hay);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 5px 5px 0 #c0392b44;
+      touch-action: none;
+      max-width: 100%;
+    }
+    #maze-canvas {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    #maze-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 52px);
+      grid-template-rows: repeat(2, 52px);
+      gap: 6px;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+    .maze-btn {
+      font-size: 1.5rem;
+      background: var(--wood);
+      color: var(--cream);
+      border: 3px solid var(--hay);
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #4a2c14;
+      transition: transform .1s, background .1s;
+      display: flex; align-items: center; justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .maze-btn:active { transform: scale(.92); background: var(--barn); }
+    #btn-up    { grid-column: 2; grid-row: 1; }
+    #btn-left  { grid-column: 1; grid-row: 2; }
+    #btn-down  { grid-column: 2; grid-row: 2; }
+    #btn-right { grid-column: 3; grid-row: 2; }
+    #maze-restart-btn {
+      margin-top: 1rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1rem;
+      background: var(--grass);
+      color: var(--cream);
+      border: 2.5px solid var(--hay);
+      border-radius: 10px;
+      padding: .4rem 1.4rem;
+      box-shadow: 3px 3px 0 #2d4f25;
+      cursor: pointer;
+      transition: transform .15s;
+    }
+    #maze-restart-btn:hover { transform: translateY(-2px); }
+    #maze-win {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem 1.2rem;
+      background: white;
+      border: 3px solid var(--hay);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 #c0392b44;
+      text-align: center;
+      animation: fade-up .6s ease both;
+    }
+    #maze-win .win-emoji { font-size: 2.2rem; }
+    #maze-win .win-text {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1rem,2.5vw,1.5rem);
+      color: var(--barn);
+      text-shadow: 2px 2px 0 var(--hay);
+      margin: .4rem 0 .2rem;
+    }
+    #maze-win .win-sub {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood);
+      font-size: .95rem;
+    }
+    @keyframes fade-up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+
+    /* ══════════════ POOL BALLOON GAME ══════════════ */
+    #pool-game {
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 4px solid var(--hay);
+      box-shadow: 5px 5px 0 #c0392b44;
+      cursor: none;
+      user-select: none;
+      touch-action: none;
+      margin-top: 1.2rem;
+    }
+    #pool-canvas { display: block; width: 100%; }
+
+    /* watergun cursor */
+    #wg-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      display: none;
+      transform-origin: 8px 8px;
+    }
+
+    /* HUD overlay */
+    #pool-hud {
+      position: absolute;
+      top: 8px; left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: .9rem;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .pool-pill {
+      font-family: 'Boogaloo', cursive;
+      font-size: .95rem;
+      background: rgba(0,80,140,.75);
+      color: #e0f4ff;
+      border: 2px solid #6ad4ff;
+      border-radius: 20px;
+      padding: .2rem .9rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,.3);
+      letter-spacing: .5px;
+    }
+
+    /* start / win overlay */
+    .pool-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,60,120,.72);
+      gap: .7rem;
+      z-index: 20;
+      border-radius: 10px;
+      text-align: center;
+      padding: 1rem;
+    }
+    .pool-overlay p {
+      font-family: 'Boogaloo', cursive;
+      color: #e0f4ff;
+      font-size: clamp(1rem,2.5vw,1.3rem);
+      margin: 0;
+      letter-spacing: .5px;
+    }
+    .pool-overlay .ov-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.3rem,3.5vw,2rem);
+      color: var(--hay);
+      text-shadow: 2px 2px 0 #00408080;
+    }
+    .pool-btn {
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.1rem;
+      background: var(--barn);
+      color: var(--cream);
+      border: 3px solid var(--hay);
+      border-radius: 10px;
+      padding: .45rem 1.8rem;
+      box-shadow: 3px 3px 0 #7a1a0a;
+      cursor: pointer;
+      transition: transform .15s;
+    }
+    .pool-btn:hover { transform: translateY(-2px); }
+
+
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <a href="index.html" class="back-btn">← Terug naar startpagina</a>
+  <h1 class="header-title">Familieweekend 2026</h1>
+  <p class="header-sub">samen genieten &bull; lachen &bull; beleven</p>
+  <div class="lets-go-badge">🚗 LET'S GO! &nbsp; 3 juli – 5 juli 2026 🌻</div>
+</header>
+
+<!-- BODY -->
+<main class="page-body">
+
+  <!-- Intro card -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <span class="icon">🔍</span>
+      <h2>Tip 7</h2>
+    </div>
+    <div class="info-card-body">
+
+      <div id="person-content" style="display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap; margin-bottom:20px;">
+        <img id="person-img" src="" alt="" style="width:120px; border-radius:50%; border:4px solid var(--hay); box-shadow:3px 3px 0 var(--wood); flex-shrink:0;"/>
+        <p style="margin:0; font-size:clamp(1rem,2.2vw,1.2rem); color:#4a2c14; font-style:italic;">
+          "💦 Wie van de kinderen heeft al die waterballonnen in het water gegooid!<br/>
+          Kan iemand ze kapot shieten? Dat zal hun wel een lesje leren! 💦"
+        </p>
+      </div>
+
+      <!-- Pool Balloon Game -->
+      <div id="pool-game">
+        <canvas id="pool-canvas"></canvas>
+
+        <!-- Watergun SVG cursor -->
+        <svg id="wg-cursor" width="52" height="28" viewBox="0 0 52 28" xmlns="http://www.w3.org/2000/svg">
+          <!-- barrel -->
+          <rect x="0"  y="10" width="34" height="8"  rx="3" fill="#2a7a2a"/>
+          <rect x="34" y="12" width="10" height="4"  rx="2" fill="#1a5a1a"/>
+          <!-- nozzle -->
+          <rect x="44" y="11" width="8"  height="6"  rx="2" fill="#3a9a3a"/>
+          <!-- body -->
+          <rect x="6"  y="8"  width="22" height="12" rx="4" fill="#3a9a3a"/>
+          <rect x="8"  y="9"  width="18" height="5"  rx="2" fill="#5ab85a" opacity=".5"/>
+          <!-- grip -->
+          <rect x="12" y="18" width="8"  height="9"  rx="3" fill="#2a7a2a"/>
+          <rect x="14" y="19" width="4"  height="4"  rx="1" fill="#1a5a1a"/>
+          <!-- trigger -->
+          <rect x="18" y="16" width="3"  height="5"  rx="1" fill="#f5c842"/>
+          <!-- water tank -->
+          <ellipse cx="24" cy="14" rx="5" ry="4" fill="#aad8f7" opacity=".6"/>
+        </svg>
+
+        <div id="pool-hud">
+          <div class="pool-pill" id="ph-score">💦 0 pts</div>
+          <div class="pool-pill" id="ph-left">🎈 20</div>
+          <div class="pool-pill" id="ph-time">⏱ 60s</div>
+          <div class="pool-pill" id="ph-ammo">💧 ∞</div>
+        </div>
+
+        <!-- Start overlay -->
+        <div class="pool-overlay" id="pool-start">
+          <div class="ov-title">💦 Waterballon Schieten!</div>
+          <p>Shiet de ballonnen in het zwembad kapot!</p>
+          <p style="font-size:.88em;opacity:.75;">Beweeg je muis — klik om te schieten</p>
+          <button class="pool-btn" id="pool-start-btn">🔫 Start!</button>
+        </div>
+
+        <!-- Win/end overlay -->
+        <div class="pool-overlay" id="pool-end" style="display:none;">
+          <div class="ov-title" id="pool-end-title">🎉 Tijd is om!</div>
+          <p id="pool-end-sub"></p>
+          <button class="pool-btn" id="pool-retry-btn">🔄 Opnieuw</button>
+        </div>
+      </div>
+      <!-- Success message – exact tip-4 style -->
+      <div class="success-msg" id="success-msg">
+        <div class="success-inner">
+          <div class="emoji-row">💦</div>
+          <p>Opgeruimt staat netjes, nu kunnen we tenminste rustig in het zwembad!</p>
+          <button class="pool-btn" id="pool-win-retry-btn" style="margin-top:1rem;">🔄 Nog eens spelen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  const tipEnabled = localStorage.getItem('tip-enabled') === "7";
+  if (tipEnabled === false) {
+    window.location = 'tip-master.html';
+  }
+</script>
+<script>
+  // Known family members and their head images (same files as used in other pages)
+  const heads = {
+    david:    'heads/david.png',
+    francis:  'heads/francis.png',
+    gregorie: 'heads/gregorie.png',
+    helena:   'heads/helena.png',
+    lydia:    'heads/lydia.png',
+    seppe:    'heads/seppe.png',
+    steve:    'heads/steve.png',
+    vicky:    'heads/vicky.png',
+  };
+
+  // Capitalise first letter for display
+  function capitalise(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+  }
+
+  // Read ?persoon=name from the URL  e.g. tip-onbekend.html?persoon=seppe
+  const params  = new URLSearchParams(window.location.search);
+  const raw     = (params.get('persoon') || '').trim().toLowerCase();
+  const display = raw ? capitalise(raw) : 'Iemand';
+
+  // Update image (fall back to first known person if name not recognised)
+  const img = document.getElementById('person-img');
+  img.src = heads[raw] || Object.values(heads)[0];
+  img.alt = display;
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const gameEl   = document.getElementById('pool-game');
+  const canvas   = document.getElementById('pool-canvas');
+  const ctx      = canvas.getContext('2d');
+  const cursor   = document.getElementById('wg-cursor');
+  const startOv  = document.getElementById('pool-start');
+  const endOv    = document.getElementById('pool-end');
+  const endTitle = document.getElementById('pool-end-title');
+  const endSub   = document.getElementById('pool-end-sub');
+  const phScore  = document.getElementById('ph-score');
+  const phLeft   = document.getElementById('ph-left');
+  const phTime   = document.getElementById('ph-time');
+
+  const BALLOON_COLORS = ['#e74c3c','#e67e22','#9b59b6','#e91e8c','#27ae60','#f1c40f','#ff69b4'];
+  const TOTAL_BALLOONS = 20;
+  const GAME_TIME      = 60; // seconds
+
+  let W, H, running = false, animId;
+  let score = 0, timeLeft = GAME_TIME, timerInterval;
+  let balloons = [], splashes = [], jets = [];
+  let mouseX = 0, mouseY = 0, gunAngle = 0;
+
+  // ── Resize canvas to fit container ────────────────────────────────────
+  function resize() {
+    W = gameEl.offsetWidth;
+    H = Math.max(360, Math.round(W * 0.55));
+    canvas.width  = W;
+    canvas.height = H;
+    canvas.style.height = H + 'px';
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); if (!running) drawBg(); });
+
+  // ── Balloon class ──────────────────────────────────────────────────────
+  function makeBalloon() {
+    const col = BALLOON_COLORS[Math.floor(Math.random() * BALLOON_COLORS.length)];
+    // spawn anywhere in the pool area (middle 70% of canvas)
+    const x   = W * 0.1 + Math.random() * W * 0.8;
+    const spd = 0.4 + Math.random() * 0.9;
+    const r   = 16 + Math.random() * 12;
+    return {
+      x, y: H * 0.35 + Math.random() * H * 0.45,
+      vx: (Math.random() - 0.5) * spd * 1.4,
+      vy: (Math.random() - 0.5) * spd * 0.6,
+      r, col,
+      wobble: Math.random() * Math.PI * 2,
+      wobbleSpd: 0.04 + Math.random() * 0.04,
+      alive: true,
+      popping: false, popFrame: 0,
+    };
+  }
+
+  function spawnBalloons() {
+    balloons = [];
+    for (let i = 0; i < TOTAL_BALLOONS; i++) {
+      const b = makeBalloon();
+      // stagger them so they don't all appear at once
+      b._delay = i * 18;
+      b._active = false;
+      balloons.push(b);
+    }
+  }
+
+  // ── Water jet (shot) ──────────────────────────────────────────────────
+  function fireJet(fromX, fromY, toX, toY) {
+    const angle = Math.atan2(toY - fromY, toX - fromX);
+    const spd   = 18;
+    jets.push({
+      x: fromX, y: fromY,
+      vx: Math.cos(angle) * spd,
+      vy: Math.sin(angle) * spd,
+      life: 1, alive: true,
+    });
+  }
+
+  // ── Splash particles ──────────────────────────────────────────────────
+  // Water colours — always blue/white regardless of balloon colour
+  const WATER_COLS = ['#6ad4ff','#29b6f6','#aee9ff','#ffffff','#b3e5fc','#00bcd4','#e0f7ff'];
+
+  function makeSplash(x, y) {
+    // Main burst: drops fly outward
+    for (let i = 0; i < 18; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const spd   = 2.5 + Math.random() * 6;
+      splashes.push({
+        x, y,
+        vx: Math.cos(angle) * spd,
+        vy: Math.sin(angle) * spd - 3,
+        life: 1,
+        col: WATER_COLS[Math.floor(Math.random() * WATER_COLS.length)],
+        r: 3 + Math.random() * 5,
+        shine: Math.random() > 0.5,
+        alive: true,
+      });
+    }
+    // Upward arc: simulates water shooting up
+    for (let i = 0; i < 8; i++) {
+      const angle = -Math.PI/2 + (Math.random() - 0.5) * Math.PI * 0.8;
+      const spd   = 4 + Math.random() * 7;
+      splashes.push({
+        x: x + (Math.random()-0.5)*10,
+        y,
+        vx: Math.cos(angle) * spd,
+        vy: Math.sin(angle) * spd,
+        life: 1,
+        col: '#e0f7ff',
+        r: 2 + Math.random() * 3,
+        shine: true,
+        alive: true,
+      });
+    }
+    // Ring ripple markers (flat, expand outward)
+    splashes.push({ x, y, vx:0, vy:0, life:1, col:'#29b6f660', r:4, ring:true, alive:true, shine:false });
+    splashes.push({ x, y, vx:0, vy:0, life:1, col:'#6ad4ff40', r:6, ring:true, alive:true, shine:false });
+  }
+
+  // ── Draw background: pool ─────────────────────────────────────────────
+  function drawBg() {
+    // Sky / pool surround
+    ctx.fillStyle = '#e8f4e8';
+    ctx.fillRect(0, 0, W, H);
+
+    // Tiled surround (cream with tan lines)
+    for (let tx = 0; tx < W; tx += 32) {
+      for (let ty = 0; ty < H * 0.3; ty += 32) {
+        ctx.fillStyle = (Math.floor(tx/32 + ty/32)) % 2 === 0 ? '#f0e8d0' : '#e8dcc0';
+        ctx.fillRect(tx, ty, 32, 32);
+      }
+    }
+    // Pool edge
+    const poolY = H * 0.28;
+    const poolH = H * 0.62;
+    ctx.fillStyle = '#5bbad0';
+    ctx.beginPath();
+    ctx.roundRect(W*0.04, poolY, W*0.92, poolH, 20);
+    ctx.fill();
+
+    // Water gradient overlay
+    const wg = ctx.createLinearGradient(0, poolY, 0, poolY + poolH);
+    wg.addColorStop(0,   'rgba(100,200,255,0.35)');
+    wg.addColorStop(0.5, 'rgba(0,120,200,0.15)');
+    wg.addColorStop(1,   'rgba(0,60,140,0.3)');
+    ctx.fillStyle = wg;
+    ctx.beginPath();
+    ctx.roundRect(W*0.04, poolY, W*0.92, poolH, 20);
+    ctx.fill();
+
+    // Animated wave lines
+    const t = Date.now() / 900;
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+    ctx.lineWidth = 2;
+    for (let wave = 0; wave < 4; wave++) {
+      const wy = poolY + poolH * (0.2 + wave * 0.2);
+      ctx.beginPath();
+      for (let x = W*0.04; x <= W*0.96; x += 4) {
+        const y = wy + Math.sin((x / W * 4 + t + wave)) * 5;
+        wave === 0 && x === W*0.04 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        if (wave !== 0) x === W*0.04 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+
+    // Pool rim
+    ctx.strokeStyle = '#c8a860';
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.roundRect(W*0.04, poolY, W*0.92, poolH, 20);
+    ctx.stroke();
+
+    // Ladder (right side)
+    ctx.strokeStyle = '#aaa';
+    ctx.lineWidth = 3;
+    const lx = W * 0.92;
+    ctx.beginPath();
+    ctx.moveTo(lx - 10, poolY - 10); ctx.lineTo(lx - 10, poolY + 60);
+    ctx.moveTo(lx + 10, poolY - 10); ctx.lineTo(lx + 10, poolY + 60);
+    for (let s = 0; s < 4; s++) {
+      const sy = poolY + 5 + s * 16;
+      ctx.moveTo(lx - 10, sy); ctx.lineTo(lx + 10, sy);
+    }
+    ctx.stroke();
+
+    // Ground/grass at bottom
+    ctx.fillStyle = '#4a7c3f';
+    ctx.fillRect(0, H * 0.92, W, H * 0.08);
+  }
+
+  // ── Draw balloon ──────────────────────────────────────────────────────
+  function drawBalloon(b) {
+    if (b.popping) {
+      // Pop burst — water droplets flying out
+      const prog = b.popFrame / 10;
+      ctx.globalAlpha = 1 - prog;
+      for (let i = 0; i < 10; i++) {
+        const a = (i / 10) * Math.PI * 2;
+        const d = b.r * prog * 3;
+        ctx.beginPath();
+        ctx.arc(b.x + Math.cos(a)*d, b.y + Math.sin(a)*d, Math.max(0.01, b.r * 0.25 * (1-prog*0.5)), 0, Math.PI*2);
+        ctx.fillStyle = b.col;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      return;
+    }
+
+    const wobX = Math.sin(b.wobble) * 1.5;
+    const wobY = Math.cos(b.wobble * 0.7) * 1.2; // gentle bob up/down in water
+
+    // ── Water reflection beneath balloon ──────────────────────────────
+    // Soft oval reflection on the water surface
+    ctx.save();
+    ctx.globalAlpha = 0.18;
+    const refGrd = ctx.createRadialGradient(b.x, b.y + b.r * 0.6, 0, b.x, b.y + b.r * 0.6, b.r * 0.9);
+    refGrd.addColorStop(0, b.col);
+    refGrd.addColorStop(1, 'transparent');
+    ctx.fillStyle = refGrd;
+    ctx.beginPath();
+    ctx.ellipse(b.x + wobX, b.y + b.r * 0.55 + wobY, Math.max(0.01,b.r * 0.85), Math.max(0.01,b.r * 0.28), 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+
+    // ── Balloon body — rounder/squatter (water-filled) ─────────────────
+    const grd = ctx.createRadialGradient(
+      b.x + wobX - b.r*0.25, b.y + wobY - b.r*0.25, b.r*0.05,
+      b.x + wobX, b.y + wobY, b.r
+    );
+    grd.addColorStop(0,   lighten(b.col, 70));
+    grd.addColorStop(0.45, lighten(b.col, 20));
+    grd.addColorStop(0.8,  b.col);
+    grd.addColorStop(1,    darken(b.col, 50));
+    ctx.beginPath();
+    // Squatter ellipse — water balloons are rounder/wider than air balloons
+    ctx.ellipse(b.x + wobX, b.y + wobY, Math.max(0.01,b.r * 1.05), Math.max(0.01,b.r * 0.92), 0, 0, Math.PI*2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // ── Translucent water shimmer inside ──────────────────────────────
+    const shimGrd = ctx.createRadialGradient(
+      b.x + wobX, b.y + wobY + b.r*0.2, 0,
+      b.x + wobX, b.y + wobY + b.r*0.2, b.r*0.55
+    );
+    shimGrd.addColorStop(0, 'rgba(255,255,255,0.18)');
+    shimGrd.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.beginPath();
+    ctx.ellipse(b.x + wobX, b.y + wobY + b.r*0.15, Math.max(0.01,b.r*0.6), Math.max(0.01,b.r*0.45), 0, 0, Math.PI*2);
+    ctx.fillStyle = shimGrd;
+    ctx.fill();
+
+    // ── Main shine highlight (top-left) ───────────────────────────────
+    ctx.beginPath();
+    ctx.ellipse(b.x + wobX - b.r*0.3, b.y + wobY - b.r*0.32, Math.max(0.01,b.r*0.26), Math.max(0.01,b.r*0.16), -0.6, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,255,255,0.65)';
+    ctx.fill();
+
+    // ── Small secondary shine ─────────────────────────────────────────
+    ctx.beginPath();
+    ctx.arc(b.x + wobX + b.r*0.15, b.y + wobY - b.r*0.1, Math.max(0.01,b.r*0.09), 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.fill();
+
+    // ── Tiny knot nub at bottom (no string) ───────────────────────────
+    ctx.beginPath();
+    ctx.ellipse(b.x + wobX, b.y + wobY + b.r*0.9, Math.max(0.01,b.r*0.12), Math.max(0.01,b.r*0.09), 0, 0, Math.PI*2);
+    ctx.fillStyle = darken(b.col, 60);
+    ctx.fill();
+
+    // ── Subtle dark outline so balloon reads against water ─────────────
+    ctx.beginPath();
+    ctx.ellipse(b.x + wobX, b.y + wobY, Math.max(0.01,b.r * 1.05), Math.max(0.01,b.r * 0.92), 0, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+  }
+
+  function lighten(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.min(255, (n>>16)+amt);
+    const g = Math.min(255, ((n>>8)&0xff)+amt);
+    const b = Math.min(255, (n&0xff)+amt);
+    return `rgb(${r},${g},${b})`;
+  }
+  function darken(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.max(0, (n>>16)-amt);
+    const g = Math.max(0, ((n>>8)&0xff)-amt);
+    const b = Math.max(0, (n&0xff)-amt);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // ── Draw watergun (bottom-center, aimed at mouse) ─────────────────────
+  function drawGun() {
+    const gx = W / 2;
+    const gy = H - 22;
+    const angle = Math.atan2(mouseY - gy, mouseX - gx);
+
+    ctx.save();
+    ctx.translate(gx, gy);
+    ctx.rotate(angle);
+
+    // body
+    ctx.fillStyle = '#2d8a2d';
+    ctx.beginPath(); ctx.roundRect(-8, -8, 42, 16, 5); ctx.fill();
+    ctx.fillStyle = '#3aaa3a';
+    ctx.beginPath(); ctx.roundRect(-6, -6, 38, 8, 3); ctx.fill();
+    // barrel
+    ctx.fillStyle = '#1a6a1a';
+    ctx.beginPath(); ctx.roundRect(34, -4, 14, 8, 3); ctx.fill();
+    // grip
+    ctx.fillStyle = '#2d8a2d';
+    ctx.beginPath(); ctx.roundRect(2, 8, 10, 14, 4); ctx.fill();
+    // trigger
+    ctx.fillStyle = '#f5c842';
+    ctx.beginPath(); ctx.roundRect(10, 4, 4, 8, 2); ctx.fill();
+    // water tank
+    ctx.fillStyle = 'rgba(100,200,255,0.7)';
+    ctx.beginPath(); ctx.ellipse(16, 0, 8, 6, 0, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = 'rgba(0,150,200,0.5)';
+    ctx.lineWidth = 1.5; ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // ── Main loop ─────────────────────────────────────────────────────────
+  function loop() {
+    drawBg();
+    const now = Date.now();
+
+    // Activate balloons with delay
+    balloons.forEach(b => {
+      if (!b._active && now - startTime > b._delay * 60) b._active = true;
+    });
+
+    // Update & draw balloons
+    const poolY = H * 0.28;
+    const poolH = H * 0.62;
+    let alive = 0;
+    balloons.forEach(b => {
+      if (!b._active) return;
+      if (b.popping) {
+        b.popFrame++;
+        if (b.popFrame > 10) b.alive = false;
+        drawBalloon(b);
+        return;
+      }
+      if (!b.alive) return;
+      alive++;
+      b.wobble += b.wobbleSpd;
+      b.x += b.vx;
+      b.y += b.vy;
+      // bounce off pool walls
+      if (b.x - b.r < W*0.05)  { b.x = W*0.05 + b.r;  b.vx = Math.abs(b.vx); }
+      if (b.x + b.r > W*0.95)  { b.x = W*0.95 - b.r;  b.vx = -Math.abs(b.vx); }
+      if (b.y - b.r < poolY + 10) { b.y = poolY + 10 + b.r; b.vy = Math.abs(b.vy); }
+      if (b.y + b.r > poolY + poolH - 10) { b.y = poolY + poolH - 10 - b.r; b.vy = -Math.abs(b.vy); }
+      drawBalloon(b);
+    });
+
+    // Update & draw jets
+    jets.forEach(j => {
+      if (!j.alive) return;
+      j.x += j.vx; j.y += j.vy;
+      j.life -= 0.04;
+      if (j.life <= 0 || j.x < 0 || j.x > W || j.y < 0 || j.y > H) { j.alive = false; return; }
+
+      // Collision with balloons
+      balloons.forEach(b => {
+        if (!b.alive || b.popping || !b._active) return;
+        const dx = j.x - b.x, dy = j.y - b.y;
+        if (dx*dx + dy*dy < (b.r+6)*(b.r+6)) {
+          b.popping = true; b.popFrame = 0;
+          j.alive = false;
+          score++;
+          phScore.textContent = '💦 ' + score * 10 + ' pts';
+          phLeft.textContent  = '🎈 ' + (TOTAL_BALLOONS - score);
+          makeSplash(b.x, b.y);
+          if (score >= TOTAL_BALLOONS) endGame(true);
+        }
+      });
+
+      // Draw water blob
+      ctx.globalAlpha = j.life * 0.85;
+      ctx.fillStyle = '#6ad4ff';
+      ctx.beginPath();
+      ctx.arc(j.x, j.y, 5, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    // Update & draw water splashes
+    splashes.forEach(s => {
+      if (!s.alive) return;
+      if (s.ring) {
+        // Expanding ripple ring
+        s.r += 2.2;
+        s.life -= 0.045;
+        if (s.life <= 0) { s.alive = false; return; }
+        ctx.globalAlpha = s.life * 0.6;
+        ctx.strokeStyle = s.col;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, Math.max(0.01,s.r), 0, Math.PI*2);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        return;
+      }
+      s.x  += s.vx;
+      s.y  += s.vy;
+      s.vy += 0.22; // gravity
+      s.vx *= 0.98; // slight drag
+      s.life -= 0.032;
+      if (s.life <= 0) { s.alive = false; return; }
+      const radius = s.r * Math.max(0.2, s.life);
+      ctx.globalAlpha = Math.min(1, s.life * 1.4);
+      // Teardrop-ish: stretch in direction of motion
+      ctx.fillStyle = s.col;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, Math.max(0.01,radius), 0, Math.PI*2);
+      ctx.fill();
+      // Shine highlight
+      if (s.shine) {
+        ctx.globalAlpha = Math.min(0.7, s.life);
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(s.x - radius*0.3, s.y - radius*0.3, Math.max(0.01,radius*0.28), 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    });
+
+    // Clean up dead objects
+    jets     = jets.filter(j => j.alive);
+    splashes = splashes.filter(s => s.alive);
+    balloons = balloons.filter(b => b.alive || b.popping);
+
+    drawGun();
+    animId = requestAnimationFrame(loop);
+  }
+
+  // ── Timer ─────────────────────────────────────────────────────────────
+  let startTime = 0;
+  function startTimer() {
+    timeLeft = GAME_TIME;
+    phTime.textContent = `⏱ ${timeLeft}s`;
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      phTime.textContent = `⏱ ${timeLeft}s`;
+      if (timeLeft <= 0) endGame(false);
+    }, 1000);
+  }
+
+  // ── Start / End ────────────────────────────────────────────────────────
+  function startGame() {
+    score = 0; jets = []; splashes = [];
+    phScore.textContent = '💦 0 pts';
+    phLeft.textContent  = '🎈 ' + TOTAL_BALLOONS;
+    startOv.style.display = 'none';
+    endOv.style.display   = 'none';
+    spawnBalloons();
+    startTime = Date.now();
+    running = true;
+    startTimer();
+    animId = requestAnimationFrame(loop);
+  }
+
+  function endGame(won) {
+    running = false;
+    cancelAnimationFrame(animId);
+    clearInterval(timerInterval);
+    if (won) {
+      endOv.style.display = 'none';
+      const msg = document.getElementById('success-msg');
+      msg.style.display = 'block';
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      endTitle.textContent = '⏰ Tijd is om!';
+      endSub.textContent   = 'Score: ' + score*10 + ' punten (' + score + '/' + TOTAL_BALLOONS + ' ballonnen)';
+      endOv.style.display  = 'flex';
+    }
+  }
+
+  // ── Mouse / Touch ──────────────────────────────────────────────────────
+  gameEl.addEventListener('mouseenter', () => {
+    if (running) { cursor.style.display = 'block'; }
+  });
+  gameEl.addEventListener('mouseleave', () => { cursor.style.display = 'none'; });
+
+  gameEl.addEventListener('mousemove', e => {
+    const rect = gameEl.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+    // move custom cursor
+    cursor.style.left = (e.clientX - 8) + 'px';
+    cursor.style.top  = (e.clientY - 8) + 'px';
+    const angle = Math.atan2(mouseY - H + 22, mouseX - W/2);
+    cursor.style.transform = `rotate(${angle}rad)`;
+  });
+
+  gameEl.addEventListener('click', e => {
+    if (!running) return;
+    const rect = gameEl.getBoundingClientRect();
+    const tx = e.clientX - rect.left;
+    const ty = e.clientY - rect.top;
+    fireJet(W/2, H - 22, tx, ty);
+  });
+
+  // Touch: tap to shoot
+  gameEl.addEventListener('touchstart', e => {
+    if (!running) return;
+    e.preventDefault();
+    const rect = gameEl.getBoundingClientRect();
+    const tx = e.touches[0].clientX - rect.left;
+    const ty = e.touches[0].clientY - rect.top;
+    mouseX = tx; mouseY = ty;
+    fireJet(W/2, H - 22, tx, ty);
+  }, {passive:false});
+  gameEl.addEventListener('touchmove', e => {
+    if (!running) return;
+    e.preventDefault();
+    const rect = gameEl.getBoundingClientRect();
+    mouseX = e.touches[0].clientX - rect.left;
+    mouseY = e.touches[0].clientY - rect.top;
+  }, {passive:false});
+
+  document.getElementById('pool-start-btn').addEventListener('click', startGame);
+  document.getElementById('pool-retry-btn').addEventListener('click', startGame);
+  document.getElementById('pool-win-retry-btn').addEventListener('click', function() {
+    document.getElementById('success-msg').style.display = 'none';
+    startGame();
+  });
+
+  // Initial background draw
+  drawBg();
+});
+</script>
+
+</body>
+</html>
