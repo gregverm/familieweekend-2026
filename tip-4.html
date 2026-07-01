@@ -406,7 +406,7 @@
 <script>
   const tipEnabled = localStorage.getItem('tip-enabled') === "4";
   if (tipEnabled === false) {
-    window.location = 'tip-master.html';
+    //window.location = 'tip-master.html';
   }
 </script>
 <script>
@@ -457,12 +457,12 @@
       canvas.width  = img.offsetWidth  || wrap.offsetWidth;
       canvas.height = img.offsetHeight || Math.round((img.offsetWidth || wrap.offsetWidth) * 0.75);
 
-      // Scratch layer: silver/grey gradient with a subtle texture
+      // Scratch layer: earthy dirt-brown gradient with a subtle texture
       const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0,    '#b0b0b8');
-      grad.addColorStop(0.3,  '#d8d8e0');
-      grad.addColorStop(0.6,  '#a8a8b0');
-      grad.addColorStop(1,    '#c8c8d0');
+      grad.addColorStop(0,    '#6b4a30');
+      grad.addColorStop(0.3,  '#8b6440');
+      grad.addColorStop(0.6,  '#5c3d26');
+      grad.addColorStop(1,    '#7a5335');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -473,7 +473,7 @@
         const r  = 1 + Math.random() * 3;
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.12)';
+        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,235,200,0.18)' : 'rgba(40,25,15,0.25)';
         ctx.fill();
       }
     }

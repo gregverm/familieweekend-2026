@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Familieweekend 2026 - Home</title>
+  <title>Familieweekend 2026 - Home Lock</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
   <!-- Google tag (gtag.js) -->
@@ -393,6 +393,398 @@
       from { transform: scale(0) rotate(-15deg); opacity: 0; }
       to   { transform: scale(1) rotate(0deg);  opacity: 1; }
     }
+
+    /* ═══════════════ LOCK + CROSSWORD ═══════════════ */
+    #lock-section {
+      background: white;
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #c0392b44, 0 8px 28px rgba(0,0,0,.08);
+      /* collapsed: takes no space */
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-bottom: 0;
+      /* no margin while hidden so no gap */
+    }
+    #lock-section.slide-in {
+      animation: lock-slide-in .8s cubic-bezier(.22,1.4,.55,1) forwards;
+    }
+    @keyframes lock-slide-in {
+      0%   { max-height: 0;      opacity: 0; margin-bottom: 0;    transform: translateY(-30px); }
+      30%  { opacity: 1; }
+      100% { max-height: 2000px; opacity: 1; margin-bottom: 2rem; transform: translateY(0); }
+    }
+    #lock-section-header {
+      background: var(--wood);
+      padding: .7rem 1.4rem;
+      border-radius: 13px 13px 0 0;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    #lock-section-header h2 {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.4rem,3.5vw,2rem);
+      color: var(--hay); text-shadow: 2px 2px 0 #4a2c14;
+      margin: 0; line-height: 1;
+    }
+    #lock-section-body {
+      padding: 1.4rem 1.6rem 1.8rem;
+      display: flex;
+      flex-direction: column;  /* stack: [lock+dials row] then [crossword below] */
+      gap: 1.5rem;
+    }
+    #lock-and-combo {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    #lock-wrap {
+      flex-shrink: 0;
+    }
+    #lock-combo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .7rem;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    /* Combination dials */
+    #combo-wrap {
+      margin: 1rem auto .5rem;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      background: #1a1a1a;
+      border: 4px solid #555;
+      border-radius: 14px;
+      padding: 12px 18px;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,.6), 0 4px 0 #000;
+    }
+    .dial-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .dial-btn {
+      width: 36px; height: 28px;
+      background: linear-gradient(180deg,#555,#333);
+      border: 2px solid #666;
+      border-radius: 6px;
+      color: #ddd;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .1s, transform .1s;
+      box-shadow: 0 2px 0 #111;
+      user-select: none;
+    }
+    .dial-btn:active { transform: scale(.93); background: #222; }
+    .dial-digit {
+      width: 44px; height: 52px;
+      background: linear-gradient(180deg,#111,#222);
+      border: 2px solid #444;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Leckerli One', cursive;
+      font-size: 2rem;
+      color: var(--hay);
+      text-shadow: 0 0 8px #f5c84288;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .dial-digit::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 40%;
+      background: linear-gradient(180deg,rgba(255,255,255,.08),transparent);
+      pointer-events: none;
+    }
+    /* Digit roll animation */
+    .dial-digit.roll-up   { animation: roll-up .18s ease; }
+    .dial-digit.roll-down { animation: roll-down .18s ease; }
+    @keyframes roll-up   { from{transform:translateY(-12px);opacity:.4} to{transform:none;opacity:1} }
+    @keyframes roll-down { from{transform:translateY(12px);opacity:.4}  to{transform:none;opacity:1} }
+
+    /* Wrong shake */
+    @keyframes combo-wrong {
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-8px)}
+      40%{transform:translateX(8px)}
+      60%{transform:translateX(-6px)}
+      80%{transform:translateX(6px)}
+    }
+    #combo-wrap.wrong { animation: combo-wrong .45s ease; border-color: #c0392b; }
+
+    #combo-feedback {
+      font-family: 'Boogaloo', cursive;
+      font-size: .95rem;
+      color: var(--wood);
+      min-height: 1.3em;
+      margin-top: .4rem;
+      letter-spacing: .5px;
+    }
+    #combo-feedback.error { color: var(--barn); }
+
+    /* Lock container */
+    #lock-wrap {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* Lock SVG */
+    #lock-svg {
+      width: clamp(100px, 22vw, 160px);
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+      display: block;
+      opacity: 1;
+      flex-shrink: 0;
+    }
+    #lock-svg.lock-wiggle {
+      animation: lock-wiggle .18s ease-in-out infinite;
+      transform-origin: center bottom;
+      opacity: 1;
+    }
+    @keyframes lock-wiggle {
+      0%   { transform: rotate(-6deg) scale(1.04); opacity: 1; }
+      25%  { transform: rotate(6deg) scale(1.06);  opacity: 1; }
+      50%  { transform: rotate(-5deg) scale(1.04); opacity: 1; }
+      75%  { transform: rotate(5deg) scale(1.06);  opacity: 1; }
+      100% { transform: rotate(-6deg) scale(1.04); opacity: 1; }
+    }
+    #lock-svg.lock-break {
+      animation: lock-break .6s cubic-bezier(.22,1.4,.55,1) forwards;
+    }
+    @keyframes lock-break {
+      0%   { transform: scale(1) rotate(0); opacity: 1; }
+      30%  { transform: scale(1.3) rotate(-8deg); opacity: 1; }
+      60%  { transform: scale(1.5) rotate(12deg); opacity: .6; }
+      100% { transform: scale(2) rotate(-20deg) translateY(-40px); opacity: 0; }
+    }
+    /* Shackle shake for breaking */
+    #lock-shackle {
+      transform-origin: center bottom;
+      transition: transform .3s ease;
+    }
+    #lock-svg.lock-break #lock-shackle {
+      animation: shackle-pop .5s ease forwards;
+    }
+    @keyframes shackle-pop {
+      0%   { transform: translateY(0) rotate(0); }
+      40%  { transform: translateY(-8px) rotate(-15deg); }
+      100% { transform: translateY(-30px) rotate(-40deg); opacity: 0; }
+    }
+
+    /* Crack lines that appear during wiggle */
+    #lock-cracks { opacity: 0; transition: opacity .3s; }
+    #lock-svg.lock-wiggle #lock-cracks { opacity: 1; }
+
+    /* Tap hint */
+    #lock-hint {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood);
+      font-size: clamp(.85rem,2vw,1rem);
+      margin-top: .5rem;
+      opacity: 0;
+      transition: opacity .5s;
+      letter-spacing: 1px;
+    }
+    #lock-hint.show { opacity: 1; }
+
+    /* Crossword reveal */
+    #cw-section {
+      display: none;
+      animation: fade-up .7s ease both;
+      text-align: center;
+    }
+    #cw-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.2rem,3vw,1.7rem);
+      color: var(--barn);
+      text-shadow: 2px 2px 0 var(--hay);
+      text-align: center;
+      margin-bottom: .9rem;
+    }
+    .cw-info-banner {
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(.85rem, 2vw, 1rem);
+      color: var(--wood);
+      background: var(--cream);
+      border: 2px dashed var(--hay);
+      border-radius: 10px;
+      box-shadow: 2px 2px 0 #d9c9a3;
+      padding: .7rem 1.1rem;
+      max-width: 480px;
+      margin: 0 auto 1.1rem;
+      line-height: 1.45;
+    }
+    .cw-info-banner strong { color: var(--barn); }
+    #cw-grid-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: flex-start; /* always start from left so nothing is clipped */
+    }
+    /* Centre on screens wide enough to show the full grid */
+    @media (min-width: 540px) {
+      #cw-grid-wrap { justify-content: center; }
+    }
+    #cw-grid-scaler {
+      /* no transform — just let it scroll */
+      flex-shrink: 0;
+    }
+    #cw-grid {
+      display: inline-grid;
+      border: 3px solid var(--wood);
+      padding: 2px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .cw-cell {
+      width: 34px; height: 34px;
+      position: relative;
+    }
+    /*.cw-cell.black { background: #2a1a08; }*/
+    .cw-cell.white {
+      background: white;
+      border: 1px solid #c8a860;
+      cursor: text;
+    }
+    .cw-cell.white.correct { background: #d4f4d4; }
+    .cw-cell.white.wrong   { background: #fdd; }
+    .cw-cell.white.hl      { background: #fff3b0; }
+    .cw-cell.white.active  { background: var(--hay); }
+    .cw-cell.white.key-cell {
+      background: linear-gradient(180deg, #fff8e0 0%, #fbe8b0 100%);
+      border: 1px solid var(--barn);
+      box-shadow: inset 0 0 0 1px var(--hay);
+    }
+    .cw-cell.white.key-cell input { color: var(--barn); }
+    .cw-cell.white.key-cell.hl     { background: linear-gradient(180deg, #fff3b0 0%, #f5d878 100%); }
+    .cw-cell.white.key-cell.active { background: var(--barn); }
+    .cw-cell.white.key-cell.active input { color: var(--cream); }
+    .cw-cell.white.cw-cursor {
+      background: var(--barn) !important;
+      box-shadow: 0 0 0 2px var(--barn), 0 0 0 4px var(--hay) !important;
+      z-index: 2;
+    }
+    .cw-cell.white.cw-cursor input { color: #fff !important; font-weight: 700; }
+    .cw-cell.white.word-correct { background: #c8f0c8 !important; border-color: #5aab5a !important; box-shadow: none !important; }
+    .cw-cell.white.word-correct.key-cell { border-color: var(--barn) !important; box-shadow: inset 0 0 0 1px var(--barn) !important; }
+    .cw-cell.white.word-correct input { color: #276227 !important; font-weight: 700; }
+    .cw-clue.word-correct { background: #4a7c3f !important; color: #ffffff !important; font-weight: 700; }
+    .cw-clue.word-correct .cw-clue-num { color: #ffffff !important; }
+    .cw-clue.word-correct a { color: #ffffff !important; }
+    .cw-info-banner.success {
+      background: linear-gradient(135deg, #eafbea, #c8f0c8);
+      border-color: #5aab5a;
+      box-shadow: 2px 2px 0 #a0d8a0;
+      color: #1a4d1a;
+      font-weight: 600;
+    }
+    .cw-info-banner.success strong { color: #1a4d1a; }
+    .cw-cell .cw-num {
+      position: absolute; top: 2px; left: 3px;
+      font-size: 8px; font-weight: 700; color: var(--wood);
+      pointer-events: none; line-height: 1;
+    }
+    .cw-cell input {
+      position: absolute; inset: 0;
+      width:100%; height:100%; border:none; background:transparent;
+      text-align:center; font-family:'Leckerli One',cursive;
+      font-size:1rem; color:#2a1a08; text-transform:uppercase;
+      cursor:pointer; caret-color:transparent; padding:0; outline:none;
+    }
+    /* Clues */
+    #cw-clues {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem 1.4rem;
+      margin-bottom: 1rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    @media(max-width:520px){ #cw-clues { grid-template-columns:1fr; } }
+    .cw-clue-col h3 {
+      font-family:'Boogaloo',cursive; font-size:1.05rem;
+      color:var(--barn); text-shadow:1px 1px 0 var(--hay);
+      margin:0 0 .4rem; border-bottom:2px solid var(--hay); padding-bottom:.2rem;
+    }
+    .cw-clue {
+      font-size:.88rem; color:#4a2c14; margin-bottom:.3rem;
+      cursor:pointer; border-radius:6px; padding:2px 6px;
+      transition:background .15s; line-height:1.4;
+    }
+    .cw-clue:hover  { background:#f5c84230; }
+    .cw-clue.active { background:var(--hay); font-weight:700; }
+    .cw-clue-num { font-family:'Leckerli One',cursive; color:var(--barn); margin-right:3px; }
+    .cw-tip-link {
+      display: inline-block;
+      font-size: .78rem;
+      background: var(--barn);
+      color: var(--cream);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-left: 4px;
+      text-decoration: none;
+      font-family: 'Boogaloo', cursive;
+      transition: transform .1s;
+    }
+    .cw-tip-link:hover { transform: scale(1.08); color: var(--hay); }
+    /* Actions */
+    #cw-actions {
+      display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center;
+      margin-bottom:.8rem;
+    }
+    .cw-btn {
+      font-family:'Boogaloo',cursive; font-size:.95rem;
+      border:2.5px solid var(--hay); border-radius:8px;
+      padding:.3rem 1.1rem; cursor:pointer;
+      box-shadow:2px 2px 0 rgba(0,0,0,.15); transition:transform .1s;
+    }
+    .cw-btn:hover { transform:translateY(-2px); }
+    .cw-btn.primary   { background:var(--barn);  color:var(--cream); box-shadow:2px 2px 0 #7a1a0a; }
+    .cw-btn.secondary { background:var(--grass); color:var(--cream); box-shadow:2px 2px 0 #2d4f25; }
+    .cw-btn.tertiary  { background:var(--wood);  color:var(--cream); box-shadow:2px 2px 0 #4a2c14; }
+    /* Win */
+    #cw-win {
+      display:none; text-align:center; padding:1.2rem;
+      margin-top:.8rem; background:white;
+      border:3px solid var(--hay); border-radius:14px;
+      box-shadow:5px 5px 0 #c0392b44;
+      animation:fade-up .6s ease both;
+    }
+    #cw-win .w-emoji { font-size:2.2rem; }
+    #cw-win .w-text  {
+      font-family:'Leckerli One',cursive;
+      font-size:clamp(1.1rem,3vw,1.6rem);
+      color:var(--barn); text-shadow:2px 2px 0 var(--hay);
+      margin:.4rem 0 .2rem;
+    }
+
+
+
+    /* ── BORDER PARTICLES ── */
+    #lock-section {
+      position: relative; /* needed for particle canvas */
+    }
+    #lock-particles {
+      position: absolute;
+      inset: -6px;           /* slightly outside the card border */
+      pointer-events: none;
+      z-index: 10;
+      border-radius: 20px;
+      overflow: visible;
+    }
+
   </style>
 </head>
 <body>
@@ -425,6 +817,243 @@
       <div class="cd-box"><span class="cd-num" id="cd-secs">––</span><span class="cd-unit">seconden</span></div>
     </div>
     <div class="finished-msg" id="finished-msg">🎉 Het feest is begonnen! 🎉</div>
+  </div>
+
+  <!-- Lock + Crossword -->
+  <div id="lock-section">
+    <canvas id="lock-particles"></canvas>
+    <div id="lock-section-header"><span style="font-size:1.6rem">🔒</span><h2>Het slot</h2></div>
+    <div id="lock-section-body">
+
+      <div id="lock-and-combo">
+        <!-- Giant lock -->
+        <div id="lock-wrap">
+          <svg id="lock-svg" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#f5c842"/>
+                <stop offset="50%"  stop-color="#d4a820"/>
+                <stop offset="100%" stop-color="#a07810"/>
+              </linearGradient>
+              <linearGradient id="shackleGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#e0e0e0"/>
+                <stop offset="50%"  stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#b0b0b0"/>
+              </linearGradient>
+            </defs>
+            <!-- Shackle (u-bar) -->
+            <g id="lock-shackle">
+              <path d="M35,72 L35,38 Q35,14 60,14 Q85,14 85,38 L85,72"
+                    fill="none" stroke="url(#shackleGrad)" stroke-width="14"
+                    stroke-linecap="round"/>
+              <path d="M35,72 L35,40 Q35,22 60,22 Q85,22 85,40 L85,72"
+                    fill="none" stroke="#d8d8d8" stroke-width="6"
+                    stroke-linecap="round" opacity=".5"/>
+            </g>
+            <!-- Body -->
+            <rect x="12" y="66" width="96" height="68" rx="12" fill="url(#bodyGrad)"/>
+            <rect x="14" y="68" width="92" height="30" rx="10" fill="#f7d060" opacity=".4"/>
+            <!-- Keyhole -->
+            <circle cx="60" cy="98" r="10" fill="#7a5000"/>
+            <path d="M55,108 L65,108 L63,122 L57,122 Z" fill="#7a5000"/>
+            <circle cx="60" cy="98" r="5" fill="#4a2c00"/>
+            <!-- Rivets -->
+            <circle cx="26" cy="80" r="4" fill="#c09010"/>
+            <circle cx="94" cy="80" r="4" fill="#c09010"/>
+            <circle cx="26" cy="120" r="4" fill="#c09010"/>
+            <circle cx="94" cy="120" r="4" fill="#c09010"/>
+            <!-- Crack lines (hidden until wiggle) -->
+            <g id="lock-cracks" stroke="#7a1a0a" stroke-width="1.5" stroke-linecap="round" opacity="0">
+              <line x1="44" y1="75" x2="50" y2="95"/>
+              <line x1="50" y1="95" x2="46" y2="108"/>
+              <line x1="70" y1="70" x2="76" y2="88"/>
+              <line x1="76" y1="88" x2="72" y2="100"/>
+            </g>
+            <!-- Shine -->
+            <ellipse cx="38" cy="82" rx="8" ry="5" fill="white" opacity=".18" transform="rotate(-20,38,82)"/>
+          </svg>
+        </div><!-- /lock-wrap -->
+
+        <!-- Combination lock dials -->
+        <div id="lock-combo-col">
+          <div id="combo-wrap">
+            <div class="dial-col">
+              <button class="dial-btn" data-dial="0" data-dir="up">▲</button>
+              <div class="dial-digit" id="dial-0">0</div>
+              <button class="dial-btn" data-dial="0" data-dir="down">▼</button>
+            </div>
+            <div class="dial-col">
+              <button class="dial-btn" data-dial="1" data-dir="up">▲</button>
+              <div class="dial-digit" id="dial-1">0</div>
+              <button class="dial-btn" data-dial="1" data-dir="down">▼</button>
+            </div>
+            <div class="dial-col">
+              <button class="dial-btn" data-dial="2" data-dir="up">▲</button>
+              <div class="dial-digit" id="dial-2">0</div>
+              <button class="dial-btn" data-dial="2" data-dir="down">▼</button>
+            </div>
+            <div class="dial-col">
+              <button class="dial-btn" data-dial="3" data-dir="up">▲</button>
+              <div class="dial-digit" id="dial-3">0</div>
+              <button class="dial-btn" data-dial="3" data-dir="down">▼</button>
+            </div>
+          </div>
+          <div id="combo-feedback">Voer de geheime code in...</div>
+        </div><!-- /lock-combo-col -->
+      </div><!-- /lock-and-combo -->
+
+      <!-- Crossword (hidden until lock breaks) -->
+      <div id="cw-section">
+        <div class="cw-info-banner" id="cw-info-banner">ℹ️ De ingevulde letters worden onthouden, op <strong>Donderdag (02/07) rond 17:00 uur</strong> zal je hier kunnen kijken of je het correct ingevuld hebt. Succes met de zoektocht! 🍀</div>
+        <div id="cw-title">❓Wat is de bestemming?</div>
+        <div id="cw-title cw-subtitle">Scroll om alle woorden in te vullen!</div>
+        <div id="cw-grid-wrap">
+          <div id="cw-grid-scaler">
+            <div id="cw-grid" style="grid-template-columns:repeat(9,34px);grid-template-rows:repeat(14,34px);">
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white key-cell" data-r="0" data-c="4" data-l="H"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white" data-r="1" data-c="0" data-l="B"><span class="cw-num">7</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="1" data-c="1" data-l="A"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="1" data-c="2" data-l="L"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="1" data-c="3" data-l="L"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white key-cell" data-r="1" data-c="4" data-l="O"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="1" data-c="5" data-l="N"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white key-cell" data-r="2" data-c="4" data-l="V"><span class="cw-num">4</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="2" data-c="5" data-l="U"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="2" data-c="6" data-l="I"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="2" data-c="7" data-l="L"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white" data-r="3" data-c="0" data-l="D"><span class="cw-num">2</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="3" data-c="1" data-l="I"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="3" data-c="2" data-l="E"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="3" data-c="3" data-l="R"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white key-cell" data-r="3" data-c="4" data-l="E"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="3" data-c="5" data-l="N"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white" data-r="5" data-c="2" data-l="P"><span class="cw-num">1</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="5" data-c="3" data-l="A"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white key-cell" data-r="5" data-c="4" data-l="T"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="5" data-c="5" data-l="A"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="5" data-c="6" data-l="T"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white key-cell" data-r="6" data-c="4" data-l="E"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white" data-r="7" data-c="3" data-l="T"><span class="cw-num">6</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white key-cell" data-r="7" data-c="4" data-l="R"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="7" data-c="5" data-l="O"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="7" data-c="6" data-l="U"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="7" data-c="7" data-l="W"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white key-cell" data-r="9" data-c="4" data-l="H"><span class="cw-num">8</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="9" data-c="5" data-l="O"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="9" data-c="6" data-l="O"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="9" data-c="7" data-l="I"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white" data-r="10" data-c="3" data-l="B"><span class="cw-num">3</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white key-cell" data-r="10" data-c="4" data-l="I"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="10" data-c="5" data-l="E"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="10" data-c="6" data-l="R"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white key-cell" data-r="11" data-c="4" data-l="L"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white key-cell" data-r="12" data-c="4" data-l="L"><span class="cw-num">5</span><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="12" data-c="5" data-l="I"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="12" data-c="6" data-l="L"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="12" data-c="7" data-l="L"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell white" data-r="12" data-c="8" data-l="E"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell white key-cell" data-r="13" data-c="4" data-l="E"><input type="text" maxlength="2" autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+              <div class="cw-cell black"></div>
+            </div>
+          </div><!-- /cw-grid-scaler -->
+        </div><!-- /cw-grid-wrap -->
+        <div id="cw-clues">
+          <div class="cw-clue-col"><h3>➡️ Tips</h3>
+            <div class="cw-clue" data-clue="3A"><span class="cw-clue-num">1.</span>🥔<a class="cw-tip-link" href="tip-1.html?persoon=vicky" target="_blank">→ Tip 1</a></div>
+            <div class="cw-clue" data-clue="2A"><span class="cw-clue-num">2.</span>🐄<a class="cw-tip-link" href="tip-2.html?persoon=seppe" target="_blank">→ Tip 2</a></div>
+            <div class="cw-clue" data-clue="5A"><span class="cw-clue-num">3.</span>🍺<a class="cw-tip-link" href="tip-3.html?persoon=david" target="_blank">→ Tip 3</a></div>
+            <div class="cw-clue" data-clue="10A"><span class="cw-clue-num">4.</span>🧹<a class="cw-tip-link" href="tip-4.html?persoon=helena" target="_blank">→ Tip 4</a></div>
+            <div class="cw-clue" data-clue="9A"><span class="cw-clue-num">5.</span>🔒<a class="cw-tip-link" href="tip-5.html?persoon=gregorie" target="_blank">→ Tip 5</a></div>
+            <div class="cw-clue" data-clue="4A"><span class="cw-clue-num">6.</span>💍<a class="cw-tip-link" href="tip-6.html?persoon=steve" target="_blank">→ Tip 6</a></div>
+            <div class="cw-clue" data-clue="1A"><span class="cw-clue-num">7.</span>🎈<a class="cw-tip-link" href="tip-7.html?persoon=lydia" target="_blank">→ Tip 7</a></div>
+            <div class="cw-clue" data-clue="11A"><span class="cw-clue-num">8.</span>🌾<a class="cw-tip-link" href="tip-8.html?persoon=francis" target="_blank">→ Tip 8</a></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /lock-section-body -->
   </div>
 
   <!-- Link to checklist -->
@@ -658,5 +1287,363 @@
     setTimeout(spawn, 3000 + Math.random() * 4000);
   })();
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const lockSvg   = document.getElementById('lock-svg');
+    const lockWrap  = document.getElementById('lock-wrap');
+    const cwSection = document.getElementById('cw-section');
+    const comboWrap = document.getElementById('combo-wrap');
+    const feedback  = document.getElementById('combo-feedback');
+
+    const COMBO = [2, 2, 7, 5];
+    const digits = [0, 0, 0, 0];
+
+    // ── Border particle effect when lock section slides in ──────────────
+    function startBorderParticles() {
+      const section = document.getElementById('lock-section');
+      const canvas  = document.getElementById('lock-particles');
+      if (!canvas) return;
+
+      // Size canvas to match section (incl. the -6px inset offset = +12px each side)
+      function resizeCanvas() {
+        canvas.width  = section.offsetWidth  + 12;
+        canvas.height = section.offsetHeight + 12;
+      }
+      resizeCanvas();
+
+      const ctx = canvas.getContext('2d');
+      const R   = 20; // border-radius of card
+
+      // Build an array of points along the rounded-rect perimeter
+      function borderPoints(count) {
+        const w = canvas.width, h = canvas.height;
+        const pts = [];
+        const total = count;
+        // Approximate perimeter of rounded rect
+        const straight = 2 * (w - 2*R) + 2 * (h - 2*R);
+        const corners  = 2 * Math.PI * R;
+        const perim    = straight + corners;
+
+        for (let i = 0; i < total; i++) {
+          const t = (i / total) * perim;
+          pts.push(perimPoint(t, w, h));
+        }
+        return pts;
+      }
+
+      function perimPoint(t, w, h) {
+        // Walk around: top, right-corner, right, bottom-corner, bottom, left-corner, left, top-corner
+        const segs = [
+          { len: w - 2*R,           fn: (s) => ({ x: R + s, y: 0 }) },                          // top
+          { len: Math.PI/2 * R,     fn: (s) => ({ x: w-R + Math.cos(-Math.PI/2 + s/R)*R, y: R + Math.sin(-Math.PI/2 + s/R)*R }) }, // top-right corner
+          { len: h - 2*R,           fn: (s) => ({ x: w, y: R + s }) },                          // right
+          { len: Math.PI/2 * R,     fn: (s) => ({ x: w-R + Math.cos(s/R)*R, y: h-R + Math.sin(s/R)*R }) }, // bottom-right
+          { len: w - 2*R,           fn: (s) => ({ x: w-R - s, y: h }) },                        // bottom
+          { len: Math.PI/2 * R,     fn: (s) => ({ x: R + Math.cos(Math.PI/2 + s/R)*R, y: h-R + Math.sin(Math.PI/2 + s/R)*R }) }, // bottom-left
+          { len: h - 2*R,           fn: (s) => ({ x: 0, y: h-R - s }) },                        // left
+          { len: Math.PI/2 * R,     fn: (s) => ({ x: R + Math.cos(Math.PI + s/R)*R, y: R + Math.sin(Math.PI + s/R)*R }) },         // top-left
+        ];
+        let acc = 0;
+        for (const seg of segs) {
+          if (t <= acc + seg.len) return seg.fn(t - acc);
+          acc += seg.len;
+        }
+        return segs[0].fn(0);
+      }
+
+      // Create particles spawned along the border
+      const COLORS = ['#f5c842','#c0392b','#4a7c3f','#ffffff','#f7d94c','#e8534a','#fdf6e3'];
+      const particles = [];
+      const BORDER_PTS = 120; // resolution for spawning
+
+      function spawnParticle() {
+        const idx   = Math.floor(Math.random() * BORDER_PTS);
+        const bpts  = borderPoints(BORDER_PTS);
+        const pos   = bpts[idx];
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 0.4 + Math.random() * 1.2;
+        particles.push({
+          x: pos.x, y: pos.y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 0.6,
+          r: 1.5 + Math.random() * 3,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          life: 1,
+          decay: 0.012 + Math.random() * 0.018,
+        });
+      }
+
+      // Glowing orbs that travel along the border
+      const orbs = [];
+      function spawnOrb() {
+        const t0 = Math.random();
+        const w  = canvas.width, h = canvas.height;
+        const straight = 2*(w-2*R) + 2*(h-2*R);
+        const perim    = straight + 2*Math.PI*R;
+        orbs.push({
+          t: t0 * perim,
+          speed: 1.2 + Math.random() * 1.8,
+          perim,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          size: 3 + Math.random() * 4,
+        });
+      }
+
+      // Seed some orbs
+      for (let i = 0; i < 6; i++) spawnOrb();
+
+      let frame = 0;
+      let running = true;
+      const DURATION = 180; // ~3s at 60fps
+
+      function animate() {
+        if (!running) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const progress = frame / DURATION;
+        const alpha    = Math.min(1, progress < 0.1 ? progress*10 : progress > 0.7 ? (1-progress)/0.3 : 1);
+
+        // Spawn particles from border
+        if (frame < DURATION * 0.85) {
+          for (let i = 0; i < 3; i++) spawnParticle();
+        }
+
+        // Draw + update orbs
+        const w = canvas.width, h = canvas.height;
+        const straight = 2*(w-2*R) + 2*(h-2*R);
+        const perim    = straight + 2*Math.PI*R;
+
+        orbs.forEach(function(orb) {
+          orb.t = (orb.t + orb.speed) % orb.perim;
+          const pos = perimPoint(orb.t, w, h);
+          ctx.globalAlpha = alpha * 0.85;
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, orb.size, 0, Math.PI*2);
+          ctx.fillStyle = orb.color;
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = orb.color;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          // trail
+          ctx.globalAlpha = alpha * 0.25;
+          ctx.beginPath();
+          const trailPos = perimPoint((orb.t - orb.speed*4 + orb.perim) % orb.perim, w, h);
+          ctx.arc(trailPos.x, trailPos.y, orb.size * 0.5, 0, Math.PI*2);
+          ctx.fill();
+        });
+
+        // Draw + update particles
+        particles.forEach(function(p, i) {
+          p.x  += p.vx;
+          p.y  += p.vy;
+          p.vy += 0.04; // gravity
+          p.life -= p.decay;
+          if (p.life <= 0) return;
+          ctx.globalAlpha = p.life * alpha;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI*2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+        });
+
+        // Remove dead particles
+        for (let i = particles.length-1; i >= 0; i--) {
+          if (particles[i].life <= 0) particles.splice(i, 1);
+        }
+
+        ctx.globalAlpha = 1;
+        frame++;
+        if (frame < DURATION + 60) {
+          requestAnimationFrame(animate);
+        } else {
+          running = false;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      animate();
+    }
+
+    setTimeout(function() {
+      const section = document.getElementById('lock-section');
+      section.classList.add('slide-in');
+      setTimeout(startBorderParticles, 300);
+    }, 3000);
+
+    // ── Dial buttons ────────────────────────────────────────────────────
+    document.querySelectorAll('.dial-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const d = parseInt(btn.dataset.dial);
+        const dir = btn.dataset.dir;
+        if (dir === 'up') {
+          digits[d] = (digits[d] + 1) % 10;
+        } else {
+          digits[d] = (digits[d] + 9) % 10;
+        }
+        const dialEl = document.getElementById('dial-' + d);
+        dialEl.textContent = digits[d];
+        dialEl.classList.remove('roll-up', 'roll-down');
+        void dialEl.offsetWidth;
+        dialEl.classList.add(dir === 'up' ? 'roll-up' : 'roll-down');
+
+        // Wiggle lock while fiddling
+        lockSvg.classList.remove('lock-wiggle');
+        void lockSvg.offsetWidth;
+        lockSvg.classList.add('lock-wiggle');
+        setTimeout(function() { lockSvg.classList.remove('lock-wiggle'); lockSvg.style.opacity = '1'; }, 400);
+        document.getElementById('lock-cracks').style.opacity = '1';
+        setTimeout(function() { document.getElementById('lock-cracks').style.opacity = '0'; }, 400);
+
+        checkCombo();
+      });
+    });
+
+    function checkCombo() {
+      const correct = digits.every(function(d, i) { return d === COMBO[i]; });
+      if (correct) {
+        feedback.textContent = '✅ Correct! Het slot gaat open...';
+        feedback.classList.remove('error');
+        setTimeout(breakLock, 500);
+      }
+    }
+
+    function breakLock() {
+      lockSvg.classList.remove('lock-wiggle');
+      lockSvg.classList.add('lock-break');
+      if (comboWrap) comboWrap.style.display = 'none';
+      if (feedback)  feedback.style.display  = 'none';
+
+      // Particle burst
+      burstParticles();
+
+      setTimeout(function() {
+        lockSvg.style.display = 'none';
+        cwSection.style.display = 'block';
+        cwSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 600);
+    }
+
+    function burstParticles() {
+      const rect = lockWrap.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top  + rect.height/2 + window.scrollY;
+      const colors = ['#f5c842','#c0392b','#4a7c3f','#8b5e3c','#fdf6e3'];
+      for (let i = 0; i < 22; i++) {
+        const p = document.createElement('div');
+        const angle = (i/22)*Math.PI*2;
+        const spd = 60 + Math.random()*80;
+        p.style.cssText = `position:fixed;left:${cx}px;top:${rect.top + rect.height/2}px;
+        width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;
+        background:${colors[i%colors.length]};border-radius:50%;
+        pointer-events:none;z-index:9999;transition:all .6s ease-out;`;
+        document.body.appendChild(p);
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            p.style.left   = (cx + Math.cos(angle)*spd) + 'px';
+            p.style.top    = (rect.top + rect.height/2 + Math.sin(angle)*spd) + 'px';
+            p.style.opacity = '0';
+            setTimeout(()=>p.remove(), 700);
+          });
+        });
+      }
+    }
+
+    // ── Crossword logic ─────────────────────────────────────────────────
+    const WORDS = {"1A": {"cells": [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5]]}, "2A": {"cells": [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]]}, "3A": {"cells": [[5, 2], [5, 3], [5, 4], [5, 5], [5, 6]]}, "4A": {"cells": [[7, 3], [7, 4], [7, 5], [7, 6], [7, 7]]}, "5A": {"cells": [[10, 3], [10, 4], [10, 5], [10, 6]]}, "9A": {"cells": [[12, 4], [12, 5], [12, 6], [12, 7], [12, 8]]}, "10A": {"cells": [[2, 4], [2, 5], [2, 6], [2, 7]]}, "11A": {"cells": [[9, 4], [9, 5], [9, 6], [9, 7]]}, "6D": {"cells": [[0, 4], [1, 4], [2, 4], [3, 4]]}, "7D": {"cells": [[5, 4], [6, 4], [7, 4]]}, "8D": {"cells": [[9, 4], [10, 4], [11, 4], [12, 4], [13, 4]]}};
+
+    const cellWords = {};
+    for (const [key, wd] of Object.entries(WORDS)) {
+      for (const [r,c] of wd.cells) {
+        const id = r+','+c;
+        if (!cellWords[id]) cellWords[id] = [];
+        cellWords[id].push(key);
+      }
+    }
+
+    let activeWord = null;
+
+    function getCell(r,c) { return document.querySelector(`.cw-cell[data-r="${r}"][data-c="${c}"]`); }
+    function getInput(r,c) { const el=getCell(r,c); return el?el.querySelector('input'):null; }
+
+    function setCursor(el) {
+      document.querySelectorAll('.cw-cell.cw-cursor').forEach(e=>e.classList.remove('cw-cursor'));
+      if (el) el.classList.add('cw-cursor');
+    }
+
+    function highlight(wk) {
+      document.querySelectorAll('.cw-cell.hl,.cw-cell.active').forEach(e=>e.classList.remove('hl','active'));
+      document.querySelectorAll('.cw-clue.active').forEach(e=>e.classList.remove('active'));
+      if (!wk) return;
+      activeWord = wk;
+      WORDS[wk].cells.forEach(([r,c],i)=>{
+        const el=getCell(r,c);
+        if(el) el.classList.add(i===0?'active':'hl');
+      });
+      const cl=document.querySelector(`.cw-clue[data-clue="${wk}"]`);
+      if(cl){cl.classList.add('active');cl.scrollIntoView({block:'nearest'});}
+    }
+
+    function advance(r,c) {
+      if(!activeWord) return;
+      const wd=WORDS[activeWord];
+      const idx=wd.cells.findIndex(([rr,cc])=>rr===r&&cc===c);
+      if(idx<wd.cells.length-1){const[nr,nc]=wd.cells[idx+1];getInput(nr,nc)?.focus();}
+    }
+    function retreat(r,c) {
+      if(!activeWord) return;
+      const wd=WORDS[activeWord];
+      const idx=wd.cells.findIndex(([rr,cc])=>rr===r&&cc===c);
+      if(idx>0){const[pr,pc]=wd.cells[idx-1];getInput(pr,pc)?.focus();}
+    }
+
+    // ── Persist crossword progress in localStorage ─────────────────────
+    const CW_STORAGE_KEY = 'cw-progress';
+    let savedProgress = {};
+    try { savedProgress = JSON.parse(localStorage.getItem(CW_STORAGE_KEY) || '{}'); } catch (e) { savedProgress = {}; }
+    function persistCwProgress() {
+      try { localStorage.setItem(CW_STORAGE_KEY, JSON.stringify(savedProgress)); } catch (e) { /* ignore */ }
+    }
+
+    document.querySelectorAll('.cw-cell.white').forEach(cell=>{
+      const r=parseInt(cell.dataset.r), c=parseInt(cell.dataset.c);
+      const inp=cell.querySelector('input');
+      const cellId = r+','+c;
+      if (savedProgress[cellId]) inp.value = savedProgress[cellId];
+      cell.addEventListener('click',()=>{
+        const id=r+','+c, wds=cellWords[id]||[];
+        if(!wds.length) return;
+        if(activeWord&&wds.includes(activeWord)) highlight(wds[(wds.indexOf(activeWord)+1)%wds.length]);
+        else highlight(wds[0]);
+        inp.focus();
+      });
+      inp.addEventListener('focus',()=>{
+        const id=r+','+c, wds=cellWords[id]||[];
+        if(!activeWord||!wds.includes(activeWord)) if(wds.length) highlight(wds[0]);
+        else highlight(activeWord);
+        setCursor(cell);
+      });
+      inp.addEventListener('blur',()=>{ setCursor(null); });
+      inp.addEventListener('keydown',e=>{
+        if(e.key==='Backspace'){
+          if(inp.value===''){retreat(r,c);}
+          else{inp.value='';savedProgress[cellId]='';persistCwProgress();}
+          e.preventDefault();
+        }
+        else if(['ArrowRight','ArrowDown'].includes(e.key)){advance(r,c);e.preventDefault();}
+        else if(['ArrowLeft','ArrowUp'].includes(e.key)){retreat(r,c);e.preventDefault();}
+      });
+      inp.addEventListener('input',()=>{
+        const v=inp.value.replace(/[^a-zA-Z]/g,'').toUpperCase().slice(-1);
+        inp.value=v;
+        cell.classList.remove('correct','wrong');
+        savedProgress[cellId]=v;
+        persistCwProgress();
+        if(v) advance(r,c);
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
