@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Familieweekend 2026 - Home Lock End</title>
+  <title>Familieweekend 2026 - Home Map</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
   <!-- Google tag (gtag.js) -->
@@ -237,6 +237,7 @@
       font-size:clamp(1.5rem,4vw,2.8rem); color:var(--hay);
       text-shadow:2px 2px 0 var(--barn); text-align:center;
     }
+    .reveal-on-finish { display: none; }
 
     /* ── FENCE DIVIDER ── */
     .fence-divider {
@@ -274,6 +275,47 @@
       line-height: 1.75;
     }
     .info-card-body br { display: block; content: ''; margin-top: .5rem; }
+    .hth-header {
+      background: var(--grass);
+    }
+    .hth-header h2 { color: var(--hay); text-shadow: 2px 2px 0 #2d4f25; }
+    .hth-address {
+      display: flex; align-items: center; gap: .5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      margin: .6rem 0 1rem;
+    }
+    .hth-address a {
+      color: var(--grass); font-weight: 700; text-decoration: underline;
+    }
+    .hth-address a:hover { color: var(--barn); }
+    .hth-map { border-radius: 10px; overflow: hidden; box-shadow: 2px 3px 10px rgba(0,0,0,.15); }
+    .hth-time {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      background: var(--cream);
+      border: 2px dashed var(--hay);
+      border-radius: 12px;
+      padding: .8rem 1.1rem;
+      margin: .8rem 0 1.1rem;
+    }
+    .hth-time-icon { font-size: 2rem; line-height: 1; flex-shrink: 0; }
+    .hth-time-text { display: flex; flex-direction: column; gap: .1rem; }
+    .hth-time-day {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood);
+      font-size: 1rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+    .hth-time-clock {
+      font-family: 'Leckerli One', cursive;
+      color: var(--barn);
+      font-size: clamp(1.5rem, 4vw, 1.9rem);
+      line-height: 1.15;
+      text-shadow: 1px 1px 0 var(--hay);
+    }
 
     /* ── CHECKLIST NAV CARD ── */
     .nav-card {
@@ -785,6 +827,18 @@
       overflow: visible;
     }
 
+    /* ── HERO IMAGE ── */
+    .hero-img-wrap {
+      text-align: center;
+      margin-bottom: 2rem;
+      margin-top: -2rem;
+      animation: fade-up .8s .2s ease both;
+    }
+    .hero-img {
+      width: min(500px, 85vw);
+      height: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -809,7 +863,7 @@
 <main class="page-body">
 
   <!-- Countdown -->
-  <div class="countdown-section">
+  <div class="countdown-section" id="countdown-section">
     <div class="countdown-grid" id="countdown-grid">
       <div class="cd-box"><span class="cd-num" id="cd-days">––</span><span class="cd-unit">dagen</span></div>
       <div class="cd-box"><span class="cd-num" id="cd-hours">––</span><span class="cd-unit">uren</span></div>
@@ -817,6 +871,47 @@
       <div class="cd-box"><span class="cd-num" id="cd-secs">––</span><span class="cd-unit">seconden</span></div>
     </div>
     <div class="finished-msg" id="finished-msg">🎉 Het feest is begonnen! 🎉</div>
+  </div>
+
+  <!-- Hero image -->
+  <div class="hero-img-wrap reveal-on-finish" id="hero-img-wrap">
+    <img src="img/hero.png" alt="Familieweekend 2026 - Stalhille" class="hero-img"/>
+  </div>
+
+  <!-- Hove Ter Hille destination card -->
+  <div class="info-card reveal-on-finish" id="hth-card">
+    <div class="info-card-header hth-header">
+      <span class="icon">📍</span>
+      <h2>Hove Ter Hille</h2>
+    </div>
+    <div class="info-card-body">
+      <p>
+        Bedankt om zo geduldig te wachten.<br/>
+        Jullie zijn van harte welkom in Hove Ter Hille.<br/>
+        Hieronder vind je het exacte tijdstip en de adresgegevens terug.
+      </p>
+      <div class="hth-time">
+        <span class="hth-time-icon">🕔</span>
+        <div class="hth-time-text">
+          <span class="hth-time-day">Vrijdag 3 juli</span>
+          <span class="hth-time-clock">Vanaf 17:00 uur</span>
+        </div>
+      </div>
+      <div class="hth-address">
+        <span>📮</span>
+        <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x47c3536743a5cde9:0xd2f692f1cbc99839?sa=X&ved=1t:8290&ictx=111" target="_blank">
+          Expressweg N377 6, 8490 Jabbeke
+        </a>
+      </div>
+      <div class="hth-map">
+        <iframe
+                title="Hove Ter Hille"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2505.0!2d3.0968!3d51.1856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3536743a5cde9%3A0xd2f692f1cbc99839!2sHove%20Ter%20Hille!5e0!3m2!1snl!2sbe!4v1"
+                width="100%" height="260" style="border:0;border-radius:10px;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
   </div>
 
   <!-- Lock + Crossword -->
@@ -1103,10 +1198,31 @@
 <script>
   const TARGET = new Date('2026-07-03T00:00:00');
   const elDays=document.getElementById('cd-days'),elHours=document.getElementById('cd-hours'),elMins=document.getElementById('cd-mins'),elSecs=document.getElementById('cd-secs');
-  const elGrid=document.getElementById('countdown-grid'),elLabel=document.getElementById('cd-label'),elDone=document.getElementById('finished-msg');
+  const elGrid=document.getElementById('countdown-grid'),elDone=document.getElementById('finished-msg');
+  const elHero=document.getElementById('hero-img-wrap'),elHth=document.getElementById('hth-card');
+  const countdownSection=document.getElementById('countdown-section');
+  let revealed=false;
   function pad(n){return String(Math.max(0,n)).padStart(2,'0')}
   function bumpEl(el,v){if(el.textContent!==v){el.textContent=v;el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}}
-  function tick(){const diff=TARGET-Date.now();if(diff<=0){elGrid.style.display='none';elLabel.style.display='none';elDone.style.display='block';return}const t=Math.floor(diff/1000);bumpEl(elDays,pad(Math.floor(t/86400)));bumpEl(elHours,pad(Math.floor((t%86400)/3600)));bumpEl(elMins,pad(Math.floor((t%3600)/60)));bumpEl(elSecs,pad(t%60))}
+  // Wait until the lock-section's particle burst helper is ready (it's defined
+  // in a later script block), then fire it centred on the countdown area.
+  function fireRevealParticles(attempts){
+    attempts = attempts || 0;
+    if (typeof window.burstParticles === 'function') {
+      window.burstParticles(countdownSection);
+    } else if (attempts < 50) {
+      setTimeout(function(){ fireRevealParticles(attempts + 1); }, 100);
+    }
+  }
+  function reveal(){
+    if (revealed) return;
+    revealed = true;
+    if (elGrid) elGrid.style.display = 'none';
+    if (elHero) elHero.style.display = 'block';
+    if (elHth)  elHth.style.display  = 'block';
+    fireRevealParticles();
+  }
+  function tick(){const diff=TARGET-Date.now();if(diff<=0){reveal();return}const t=Math.floor(diff/1000);bumpEl(elDays,pad(Math.floor(t/86400)));bumpEl(elHours,pad(Math.floor((t%86400)/3600)));bumpEl(elMins,pad(Math.floor((t%3600)/60)));bumpEl(elSecs,pad(t%60))}
   tick();setInterval(tick,1000);
 
   // ── EASTER EGG ────────────────────────────────────────
@@ -1524,8 +1640,8 @@
       }, 600);
     }
 
-    function burstParticles() {
-      const rect = lockWrap.getBoundingClientRect();
+    function burstParticles(centerEl) {
+      const rect = (centerEl || lockWrap).getBoundingClientRect();
       const cx = rect.left + rect.width/2;
       const cy = rect.top  + rect.height/2 + window.scrollY;
       const colors = ['#f5c842','#c0392b','#4a7c3f','#8b5e3c','#fdf6e3'];
@@ -1548,6 +1664,7 @@
         });
       }
     }
+    window.burstParticles = burstParticles;
 
     // ── Crossword logic ─────────────────────────────────────────────────
     const WORDS = {"1A": {"cells": [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5]], "answer": "BALLON"}, "2A": {"cells": [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]], "answer": "DIEREN"}, "3A": {"cells": [[5, 2], [5, 3], [5, 4], [5, 5], [5, 6]], "answer": "PATAT"}, "4A": {"cells": [[7, 3], [7, 4], [7, 5], [7, 6], [7, 7]], "answer": "TROUW"}, "5A": {"cells": [[10, 3], [10, 4], [10, 5], [10, 6]], "answer": "BIER"}, "9A": {"cells": [[12, 4], [12, 5], [12, 6], [12, 7], [12, 8]], "answer": "LILLE"}, "10A": {"cells": [[2, 4], [2, 5], [2, 6], [2, 7]], "answer": "VUIL"}, "11A": {"cells": [[9, 4], [9, 5], [9, 6], [9, 7]], "answer": "HOOI"}, "6D": {"cells": [[0, 4], [1, 4], [2, 4], [3, 4]], "answer": "HOVE"}, "7D": {"cells": [[5, 4], [6, 4], [7, 4]], "answer": "TER"}, "8D": {"cells": [[9, 4], [10, 4], [11, 4], [12, 4], [13, 4]], "answer": "HILLE"}};

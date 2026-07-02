@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Familieweekend 2026 - Kamer</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --hay:   #f5c842;
+      --barn:  #c0392b;
+      --grass: #4a7c3f;
+      --cream: #fdf6e3;
+      --wood:  #8b5e3c;
+      --teal:  #4a9b8e;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Lato', sans-serif; background: var(--cream); overflow-x: hidden; }
+
+    /* ── HERO HEADER ── */
+    .page-header {
+      min-height: 38vh;
+      background:
+              radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.55) 0%, transparent 60%),
+              linear-gradient(180deg, #aeddf7 0%, #d6edfa 42%, #c8e6a0 42%, #4a7c3f 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2.5rem 1rem 4rem;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -10%; right: -10%; height: 40%;
+      background:
+              radial-gradient(ellipse 70% 60% at 30% 100%, #5a9642 0%, transparent 70%),
+              radial-gradient(ellipse 60% 50% at 75% 100%, #4a7c3f 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── BACK LINK ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.05rem;
+      color: var(--cream);
+      background: var(--wood);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.2rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 #4a2c14;
+      position: relative; z-index: 2;
+      margin-bottom: .5rem;
+      transition: transform .15s;
+      animation: fade-up .5s .6s ease both;
+    }
+    .back-btn:hover { transform: translateY(-2px); color: var(--hay); }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* sun */
+    .sun {
+      position: absolute; top: 8%; right: 8%;
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, #fff6a0 30%, #f7d94c 65%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px 20px #f7d94c88;
+      animation: pulse-sun 4s ease-in-out infinite;
+    }
+    @keyframes pulse-sun { 0%,100%{box-shadow:0 0 60px 20px #f7d94c88}50%{box-shadow:0 0 90px 35px #f7d94cbb} }
+
+    /* clouds */
+    .cloud { position:absolute; background:white; border-radius:50px; opacity:.88; animation:drift linear infinite; }
+    .cloud::before,.cloud::after { content:''; position:absolute; background:white; border-radius:50%; }
+    .c1 { width:120px;height:38px;top:8%;left:-140px;animation-duration:32s;animation-delay:0s; }
+    .c1::before{width:60px;height:60px;top:-28px;left:18px} .c1::after{width:42px;height:42px;top:-18px;left:55px}
+    .c2 { width:90px;height:28px;top:16%;left:-110px;animation-duration:44s;animation-delay:-14s; }
+    .c2::before{width:46px;height:46px;top:-22px;left:14px} .c2::after{width:34px;height:34px;top:-14px;left:42px}
+    .c3 { width:70px;height:22px;top:5%;left:-90px;animation-duration:37s;animation-delay:-28s; }
+    .c3::before{width:36px;height:36px;top:-18px;left:10px} .c3::after{width:28px;height:28px;top:-12px;left:33px}
+    @keyframes drift { from{transform:translateX(0)} to{transform:translateX(calc(100vw + 200px))} }
+
+    .header-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      color: var(--barn);
+      text-shadow: 4px 4px 0 #7a1a0a, -2px -2px 0 #f5c842, 6px 6px 14px rgba(0,0,0,.22);
+      line-height: 1;
+      position: relative; z-index: 2;
+      animation: title-drop .8s cubic-bezier(.22,1.4,.55,1) both;
+      text-align: center;
+    }
+    @keyframes title-drop { from{transform:translateY(-60px) rotate(-3deg);opacity:0} to{transform:none;opacity:1} }
+
+    .header-sub {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--grass);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff;
+      margin-top: .4rem;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .3s ease both;
+    }
+
+    .lets-go-badge {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--cream);
+      background: var(--barn);
+      border: 3px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.6rem;
+      margin-top: .9rem;
+      box-shadow: 3px 3px 0 #7a1a0a;
+      position: relative; z-index: 2;
+      animation: fade-up .6s .5s ease both;
+    }
+
+    /* nav link */
+    .nav-link-row {
+      position: relative; z-index: 2;
+      align-self: flex-end;
+      margin-right: 1rem;
+      margin-bottom: .5rem;
+    }
+    .checklist-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.05rem;
+      color: var(--cream);
+      background: var(--wood);
+      border: 2px solid var(--hay);
+      border-radius: 8px;
+      padding: .35rem 1.2rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0 #4a2c14;
+      transition: transform .15s;
+      animation: fade-up .5s .6s ease both;
+    }
+    .checklist-btn:hover { transform: translateY(-2px); color: var(--hay); }
+
+    /* title */
+    .title-wrap { position:relative; z-index:2; text-align:center; }
+    .main-title {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(3rem, 10vw, 8rem);
+      color: var(--barn);
+      text-shadow: 4px 4px 0 #7a1a0a, -2px -2px 0 #f5c842, 8px 8px 16px rgba(0,0,0,.25);
+      line-height: 1; letter-spacing: 2px;
+      animation: title-drop .9s cubic-bezier(.22,1.4,.55,1) both;
+    }
+    @keyframes title-drop { from{transform:translateY(-80px) rotate(-4deg);opacity:0} to{transform:none;opacity:1} }
+
+    .subtitle {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1.1rem, 3.5vw, 2rem);
+      color: var(--grass); letter-spacing: 3px; text-transform: uppercase;
+      text-shadow: 1px 2px 0 #fff; margin-top: .4rem;
+      animation: fade-up .7s .4s ease both;
+    }
+    .dates-banner {
+      font-family: 'Boogaloo', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--cream); background: var(--wood);
+      padding: .45rem 2rem; border-radius: 6px;
+      border: 3px solid var(--hay); margin-top: .9rem;
+      box-shadow: 3px 3px 0 #4a2c14;
+      animation: fade-up .7s .6s ease both;
+    }
+
+    /* ── BODY ── */
+    .page-body {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-section {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fade-up .8s .2s ease both;
+    }
+    .countdown-label {
+      font-family: 'Boogaloo', cursive;
+      color: var(--wood); font-size: clamp(.9rem, 2vw, 1.25rem);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: .8rem; text-shadow: 1px 1px 0 #fff8;
+    }
+    .countdown-grid { display:flex; gap:clamp(.5rem,2vw,1.4rem); flex-wrap:wrap; justify-content:center; }
+    .cd-box {
+      background: var(--barn); border: 4px solid var(--hay);
+      border-radius: 12px; padding: .7rem 1.1rem; min-width: 90px;
+      text-align: center;
+      box-shadow: 4px 4px 0 #7a1a0a, 0 8px 24px rgba(0,0,0,.22);
+      position: relative;
+    }
+    .cd-box::after {
+      content:''; position:absolute; inset:0; border-radius:8px;
+      background: linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 60%);
+      pointer-events:none;
+    }
+    .cd-num {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(2.2rem,5vw,3.5rem); color:var(--hay);
+      line-height:1; display:block; text-shadow:2px 2px 0 #7a1a0a;
+    }
+    .cd-num.bump { animation: bump .2s ease; }
+    @keyframes bump { 0%{transform:scale(1.2) translateY(-4px)} 100%{transform:scale(1) translateY(0)} }
+    .cd-unit {
+      font-family: 'Boogaloo', cursive; font-size:.85rem;
+      color:#f5c84288; text-transform:uppercase; letter-spacing:2px;
+      margin-top:.25rem; display:block;
+    }
+    .finished-msg {
+      display:none; font-family:'Leckerli One',cursive;
+      font-size:clamp(1.5rem,4vw,2.8rem); color:var(--hay);
+      text-shadow:2px 2px 0 var(--barn); text-align:center;
+    }
+
+    /* ── FENCE DIVIDER ── */
+    .fence-divider {
+      text-align:center; font-size:2rem; letter-spacing:.6rem;
+      color:var(--wood); margin:2rem 0 1.5rem; user-select:none;
+    }
+
+    /* ── INFO CARD ── */
+    .info-card {
+      background: white;
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #c0392b44, 0 8px 28px rgba(0,0,0,.08);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      animation: fade-up .6s .3s ease both;
+    }
+    .info-card-header {
+      background: var(--wood);
+      padding: .7rem 1.4rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .info-card-header h2 {
+      font-family: 'Leckerli One', cursive;
+      font-size: clamp(1.4rem,3.5vw,2rem);
+      color: var(--hay); text-shadow: 2px 2px 0 #4a2c14;
+      margin: 0; line-height: 1;
+    }
+    .info-card-header .icon { font-size: 1.6rem; }
+    .info-card-body {
+      padding: 1.4rem 1.6rem 1.6rem;
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(.95rem, 1.8vw, 1.05rem);
+      color: #4a2c14;
+      line-height: 1.75;
+    }
+    .info-card-body br { display: block; content: ''; margin-top: .5rem; }
+
+    /* ── CHECKLIST NAV CARD ── */
+    .nav-card {
+      background: var(--grass);
+      border: 3px solid var(--hay);
+      border-radius: 16px;
+      box-shadow: 5px 5px 0 #2d4f25, 0 8px 20px rgba(0,0,0,.1);
+      padding: 1.2rem 1.6rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      margin-top: 2.5rem;
+      animation: fade-up .6s .7s ease both;
+      text-decoration: none;
+    }
+    .nav-card:hover { transform: translateY(-3px); box-shadow: 5px 8px 0 #2d4f25; transition: transform .2s, box-shadow .2s; }
+    .nav-card-text { font-family:'Boogaloo',cursive; color:var(--cream); font-size:clamp(1.1rem,2.5vw,1.5rem); letter-spacing:1px; }
+    .nav-card-text strong { display:block; font-family:'Leckerli One',cursive; font-size:clamp(1.4rem,3vw,2rem); color:var(--hay); text-shadow:2px 2px 0 #2d4f25; }
+    .nav-card-arrow { font-size:2.5rem; }
+
+    @keyframes fade-up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    @media(max-width:480px){ .cd-box{min-width:68px;padding:.5rem .7rem} }
+
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+
+  <a href="index.html" class="back-btn">← Terug naar startpagina</a>
+  <h1 class="header-title">Familieweekend 2026</h1>
+  <p class="header-sub">samen genieten &bull; lachen &bull; beleven</p>
+  <div class="lets-go-badge">🚗 LET'S GO! &nbsp; 3 juli – 5 juli 2026 🌻</div>
+</header>
+
+<!-- BODY -->
+<main class="page-body">
+
+  <!-- Intro card -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <h2 id="card-title">Kamer</h2>
+    </div>
+    <div class="info-card-body" style="padding:0; overflow:hidden; border-radius:0 0 13px 13px;">
+      <div style="padding:1rem 1.6rem .5rem; font-size:1rem; color:#4a2c14;">
+        Jouw kamer: <strong id="room-label">…</strong> — volg het pad op het plan hieronder.
+      </div>
+      <div style="position:relative; width:100%; background:#2d4f25; border-radius:0 0 13px 13px; overflow:hidden;">
+        <img src="img/floorplan.png"
+             alt="Plattegrond familieweekend"
+             style="width:100%; display:block; opacity:.92;">
+        <svg id="trail-svg"
+             viewBox="0 0 1065 1080"
+             xmlns="http://www.w3.org/2000/svg"
+             style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+
+          <path id="walk-path" fill="none"
+                stroke="rgba(255,220,50,0.4)"
+                stroke-width="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-dasharray="18 10"/>
+
+          <!-- Animated dot -->
+          <circle id="dot" r="11" fill="#f5c842" stroke="#c0392b" stroke-width="3" opacity="0.95">
+            <animateMotion id="dot-motion" dur="7s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#walk-path"/>
+            </animateMotion>
+          </circle>
+
+          <!-- Destination pulse -->
+          <circle id="dest-pulse" r="18" fill="none" stroke="#f5c842" stroke-width="3" opacity="0.9">
+            <animate attributeName="r" values="14;28;14" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.9;0.1;0.9" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle id="dest-dot" r="8" fill="#c0392b" stroke="#f5c842" stroke-width="2.5"/>
+
+          <!-- Label -->
+          <rect id="lbl-bg" height="26" rx="5" fill="#c0392b" opacity=".92"/>
+          <text id="lbl-text" text-anchor="middle" font-family="'Boogaloo',cursive" font-size="15" fill="#f5c842"/>
+
+          <!-- Blue start dot (parking) always at 257,620 -->
+          <circle cx="257" cy="620" r="13" fill="#2980b9" stroke="white" stroke-width="3" opacity="0.95"/>
+          <circle cx="257" cy="620" r="5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── ROOM PATH DEFINITIONS ──────────────────────────────────────────────────
+  // All paths start from blue dot at (257, 620).
+  // Coordinates derived from pixel analysis of the annotated floorplan image.
+  // SVG viewBox: 1065 x 1080
+  //
+  // Shared waypoints:
+  //   Blue dot (parking):          257, 620
+  //   Left wall of left building:  x = 257
+  //   Right wall of left building: x = 491
+  //   Bottom of left building:     y = 1060
+  //   Top of left building:        y = 617
+  //   Junction to main building:   257,620 → right along y≈510 → main building rooms
+  //
+  // Green entrance markers (from image analysis):
+  //   Studio F:  402, 325  (top, accessed via top path curving up)
+  //   Kamer 6:   482, 529  (top of main building corridor, left end)
+  //   Kamer 4:   533, 547  (main building corridor)
+  //   Kamer 3:   598, 547  (main building corridor)
+  //   Kamer 1:   663, 547  (main building corridor)
+  //   Kamer 7:   730, 545  (main building corridor, right end)
+  //   Studio D:  472, 716  (right wall of left building, top)
+  //   Studio E:  277, 742  (left wall of left building)
+  //   Studio C:  477, 816  (right wall of left building)
+  //   Kamer 9:   273, 861  (left wall of left building)
+  //   Studio A:  475, 940  (right wall of left building)
+  //   Kamer 8:   269, 959  (left wall of left building)
+
+  // Path from blue dot going RIGHT along building front to main building rooms:
+  // 257,620 → 257,510 → right along corridor → room entrance
+  // (The red path goes right from ~257,510 along the front of the main building)
+
+  const START = 'M 257,620';
+
+  // ── Shared segments ──
+  // Down left wall of left building
+  const DOWN_LEFT = 'L 257,660 L 257,710 L 257,760 L 257,810 L 257,860 L 257,910 L 257,960 L 257,1010 L 257,1060';
+  // Across bottom
+  const BOTTOM    = 'L 320,1060 L 390,1060 L 456,1060 L 491,1060';
+  // Up right wall (bottom → Studio A level and above)
+  const UP_RIGHT_FULL = 'L 491,1010 L 491,960 L 491,910 L 491,860 L 491,810 L 491,760 L 491,716';
+
+  // Path to main building via Inkom → Trap corridor:
+  // blue dot → right to x=419 → up to y=510 → right into Inkom → Trap corridor at y=478
+  // All corridor rooms follow Kamer 1's full path through Inkom → Trap → x=663
+  // Rooms left of Kamer 1 continue past x=663 back to their own entrance
+  const TRAP = (x, ey) => `L 260,650 L 419,650 L 419,490 L 663,490 L ${x},490 L ${x},${ey}`;
+
+
+
+  const rooms = {
+    // ── LEFT BUILDING – right wall, enter from BELOW (same as Studio A) ──
+    'studio-d': {
+      label: 'Studio D',
+      path: `${START} ${DOWN_LEFT} ${BOTTOM} ${UP_RIGHT_FULL} L 491,716`,
+      dest: { x: 491, y: 716 },
+    },
+    'studio-c': {
+      label: 'Studio C',
+      path: `${START} ${DOWN_LEFT} ${BOTTOM} L 491,800`,
+      dest: { x: 491, y: 816 },
+    },
+    'studio-a': {
+      label: 'Studio A',
+      path: `${START} ${DOWN_LEFT} ${BOTTOM} L 491,1010 L 491,960 L 491,940`,
+      dest: { x: 491, y: 940 },
+    },
+
+    // ── LEFT BUILDING – left wall, enter from left ──
+    'studio-e': {
+      label: 'Studio E',
+      path: `${START} L 257,660 L 257,710 L 257,742`,
+      dest: { x: 257, y: 742 },
+    },
+    'kamer-9': {
+      label: 'Kamer 9',
+      path: `${START} L 257,660 L 257,710 L 257,760 L 257,810 L 257,861`,
+      dest: { x: 257, y: 861 },
+    },
+    'kamer-8': {
+      label: 'Kamer 8',
+      path: `${START} L 257,660 L 257,710 L 257,760 L 257,810 L 257,860 L 257,910 L 257,959`,
+      dest: { x: 257, y: 959 },
+    },
+
+    // ── MAIN BUILDING – via Inkom → Trap corridor → down into room ──
+    'kamer-6': {
+      label: 'Kamer 6',
+      path: `${START} ${TRAP(663, 520)} L 500,520`,
+      dest: { x: 482, y: 529 },
+    },
+    'kamer-4': {
+      label: 'Kamer 4',
+      path: `${START} ${TRAP(663, 520)} L 580,520`,
+      dest: { x: 533, y: 547 },
+    },
+    'kamer-3': {
+      label: 'Kamer 3',
+      path: `${START} ${TRAP(663, 520)} L 620,520`,
+      dest: { x: 598, y: 547 },
+    },
+    'kamer-1': {
+      label: 'Kamer 1',
+      path: `${START} ${TRAP(663, 547)}`,
+      dest: { x: 663, y: 547 },
+    },
+    'kamer-7': {
+      label: 'Kamer 7',
+      path: `${START} ${TRAP(663, 520)} L 700,520`,
+      dest: { x: 730, y: 545 },
+    },
+
+    // ── STUDIO F – top building ──
+    'studio-f': {
+      label: 'Studio F',
+      path: `${START} L 260,650 L 419,650 L 419,620 L 425,510 L 428,490 L 555,490 L 555,415 L 440,405 L 402,325`,
+      dest: { x: 402, y: 325 },
+    },
+  };
+
+  // ── HELPERS ───────────────────────────────────────────────────────────────
+  function capitalise(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+  }
+
+  function slugify(s) {
+    return s.trim().toLowerCase().replace(/\s+/g, '-');
+  }
+
+  function setAttr(el, attrs) {
+    Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+  const params  = new URLSearchParams(window.location.search);
+  const rawRoom = (params.get('kamer') || '').trim().toLowerCase();
+  const rawPers = (params.get('persoon') || '').trim();
+  const display = rawPers ? rawPers : 'Iemand';
+
+  // Update card title
+  document.getElementById('card-title').textContent = display;
+
+  // Find room config – try slug match e.g. "studio-a", "kamer-6"
+  const roomKey = slugify(rawRoom) || 'studio-a';
+  const room = rooms[roomKey] || rooms['studio-a'];
+
+  // Update intro text
+  document.getElementById('room-label').textContent = room.label;
+
+  // Update SVG path
+  document.getElementById('walk-path').setAttribute('d', room.path);
+
+  // Update destination marker
+  setAttr(document.getElementById('dest-pulse'), { cx: room.dest.x, cy: room.dest.y });
+  setAttr(document.getElementById('dest-dot'),   { cx: room.dest.x, cy: room.dest.y });
+
+  // Update label
+  const lblW = 110, lblH = 26;
+  const lblX = room.dest.x - lblW / 2;
+  const lblY = room.dest.y - 36;
+  setAttr(document.getElementById('lbl-bg'),   { x: lblX, y: lblY, width: lblW });
+  setAttr(document.getElementById('lbl-text'), { x: room.dest.x, y: lblY + 17 });
+  document.getElementById('lbl-text').textContent = room.label + ' 🎯';
+
+  // Scale animation duration to path length (rough estimate via point count)
+  const pts = (room.path.match(/[ML]/g) || []).length;
+  const dur = Math.max(4, Math.min(12, pts * 0.8));
+  document.getElementById('dot-motion').setAttribute('dur', dur + 's');
+</script>
+</body>
+</html>
