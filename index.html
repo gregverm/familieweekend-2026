@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Familieweekend 2026 - Home Lock</title>
+  <title>Familieweekend 2026 - Home Lock End</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Leckerli+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
   <!-- Google tag (gtag.js) -->
@@ -904,7 +904,7 @@
 
       <!-- Crossword (hidden until lock breaks) -->
       <div id="cw-section">
-        <div class="cw-info-banner" id="cw-info-banner">ℹ️ De ingevulde letters worden onthouden, op <strong>Donderdag (02/07) rond 17:00 uur</strong> zal je hier kunnen kijken of je het correct ingevuld hebt. Succes met de zoektocht! 🍀</div>
+        <div class="cw-info-banner" id="cw-info-banner">ℹ️ De ingevulde letters worden onthouden, als je alles correct hebt ingevuld zal je de locatie kunnen ontdekken. Succes met de zoektocht! 🍀</div>
         <div id="cw-title">❓Wat is de bestemming?</div>
         <div id="cw-title cw-subtitle">Scroll om alle woorden in te vullen!</div>
         <div id="cw-grid-wrap">
@@ -1137,7 +1137,7 @@
       'heads/gregorie.png' : 'tip-5.html',
       'heads/steve.png' : 'tip-6.html',
       'heads/lydia.png' : 'tip-7.html',
-      'heads/francis.png' : 'tip-8.html'
+      'heads/francis.png' : 'tip-8.html',
     };
 
     let lastIdx = -1;
@@ -1550,7 +1550,7 @@
     }
 
     // ── Crossword logic ─────────────────────────────────────────────────
-    const WORDS = {"1A": {"cells": [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5]]}, "2A": {"cells": [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]]}, "3A": {"cells": [[5, 2], [5, 3], [5, 4], [5, 5], [5, 6]]}, "4A": {"cells": [[7, 3], [7, 4], [7, 5], [7, 6], [7, 7]]}, "5A": {"cells": [[10, 3], [10, 4], [10, 5], [10, 6]]}, "9A": {"cells": [[12, 4], [12, 5], [12, 6], [12, 7], [12, 8]]}, "10A": {"cells": [[2, 4], [2, 5], [2, 6], [2, 7]]}, "11A": {"cells": [[9, 4], [9, 5], [9, 6], [9, 7]]}, "6D": {"cells": [[0, 4], [1, 4], [2, 4], [3, 4]]}, "7D": {"cells": [[5, 4], [6, 4], [7, 4]]}, "8D": {"cells": [[9, 4], [10, 4], [11, 4], [12, 4], [13, 4]]}};
+    const WORDS = {"1A": {"cells": [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5]], "answer": "BALLON"}, "2A": {"cells": [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]], "answer": "DIEREN"}, "3A": {"cells": [[5, 2], [5, 3], [5, 4], [5, 5], [5, 6]], "answer": "PATAT"}, "4A": {"cells": [[7, 3], [7, 4], [7, 5], [7, 6], [7, 7]], "answer": "TROUW"}, "5A": {"cells": [[10, 3], [10, 4], [10, 5], [10, 6]], "answer": "BIER"}, "9A": {"cells": [[12, 4], [12, 5], [12, 6], [12, 7], [12, 8]], "answer": "LILLE"}, "10A": {"cells": [[2, 4], [2, 5], [2, 6], [2, 7]], "answer": "VUIL"}, "11A": {"cells": [[9, 4], [9, 5], [9, 6], [9, 7]], "answer": "HOOI"}, "6D": {"cells": [[0, 4], [1, 4], [2, 4], [3, 4]], "answer": "HOVE"}, "7D": {"cells": [[5, 4], [6, 4], [7, 4]], "answer": "TER"}, "8D": {"cells": [[9, 4], [10, 4], [11, 4], [12, 4], [13, 4]], "answer": "HILLE"}};
 
     const cellWords = {};
     for (const [key, wd] of Object.entries(WORDS)) {
@@ -1640,8 +1640,53 @@
         savedProgress[cellId]=v;
         persistCwProgress();
         if(v) advance(r,c);
+        checkAllWords();
       });
     });
+
+    // ── Word & destination checking ──────────────────────────────────────
+    const DEST_WORDS  = ['6D','7D','8D'];
+    const TIP_WORDS   = ['1A','2A','3A','4A','5A','9A','10A','11A'];
+
+    function getWordValue(wk) {
+      return WORDS[wk].cells.map(([r,c])=>{
+        const inp=getInput(r,c);
+        return inp?inp.value.toUpperCase():'';
+      }).join('');
+    }
+
+    function isWordCorrect(wk) {
+      return getWordValue(wk) === WORDS[wk].answer;
+    }
+
+    function markWord(wk, correct) {
+      WORDS[wk].cells.forEach(([r,c])=>{
+        const el=getCell(r,c);
+        if(!el) return;
+        el.classList.toggle('word-correct', correct);
+      });
+      const clue=document.querySelector(`.cw-clue[data-clue="${wk}"]`);
+      if(clue) clue.classList.toggle('word-correct', correct);
+    }
+
+    function checkAllWords() {
+      TIP_WORDS.forEach(wk => markWord(wk, isWordCorrect(wk)));
+      DEST_WORDS.forEach(wk => markWord(wk, isWordCorrect(wk)));
+
+      const allDestCorrect = DEST_WORDS.every(isWordCorrect);
+      const banner = document.getElementById('cw-info-banner');
+      if (!banner) return;
+      if (allDestCorrect) {
+        banner.classList.add('success');
+        banner.innerHTML = '🥳 <strong>Goed gedaan, speurneus!</strong><br/><br/> Je hebt het juiste antwoord gevonden. je bent de komende 3 dagen van harte welkom op de volgende locatie.<br/><br/>Bedankt om deze pagina dagelijks of wekelijks te bezoeken en op zoek te gaan naar de bestemming. We kijken er ernaar uit je te verwelkomen vanaf 17:00 uur.<br/><br/> Tot dan! 👋';
+      } else {
+        banner.classList.remove('success');
+        banner.innerHTML = 'ℹ️ De ingevulde letters worden onthouden, als je alles correct hebt ingevuld zal je de locatie kunnen ontdekken. Succes met de zoektocht! 🍀';
+      }
+    }
+
+    // Run on load so restored progress is evaluated immediately
+    checkAllWords();
   });
 </script>
 
