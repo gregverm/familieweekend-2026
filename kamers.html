@@ -449,6 +449,7 @@
   rooms.forEach(function(room, i) {
     const kamerSlug     = slugify(room.kamer);
     const persoonParam  = encodeURIComponent(room.persoon);
+    
     const url = 'https://gregverm.github.io/familieweekend-2026/kamer.html?kamer=' + kamerSlug + '&persoon=' + persoonParam;
 
     const card = document.createElement('a');
